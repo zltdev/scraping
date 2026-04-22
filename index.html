@@ -359,6 +359,142 @@
     to { opacity: 1; transform: translateY(0); }
   }
   tbody tr { animation: fadeIn 0.25s ease-out; }
+
+  /* ============ UPDATES (changelog del scraping) ============ */
+  header.topbar #updates-btn {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: inherit;
+    display: flex; align-items: center; gap: 6px;
+    transition: all 0.15s;
+    margin-right: 8px;
+  }
+  header.topbar #updates-btn:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.3); }
+  header.topbar #updates-btn .badge {
+    background: #f59e0b;
+    color: #0f172a;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 999px;
+    line-height: 1.4;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  #updates-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(15,23,42,0.55);
+    backdrop-filter: blur(3px);
+    z-index: 2000;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 24px;
+    overflow-y: auto;
+  }
+  #updates-backdrop.open { display: flex; }
+  #updates-panel {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 860px;
+    padding: 0;
+    overflow: hidden;
+    animation: fadeIn 0.18s ease-out;
+  }
+  #updates-panel .up-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+  }
+  #updates-panel .up-head h2 {
+    font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--text);
+  }
+  #updates-panel .up-head .up-sub {
+    font-size: 11px; color: var(--text-muted); margin-top: 2px;
+  }
+  #updates-panel .up-close {
+    background: transparent; border: none; cursor: pointer;
+    font-size: 20px; color: var(--text-muted); padding: 4px 10px; border-radius: 6px;
+    transition: all 0.12s;
+  }
+  #updates-panel .up-close:hover { background: var(--border); color: var(--text); }
+  #updates-panel .up-body { padding: 18px 22px 22px; max-height: 70vh; overflow-y: auto; }
+  #updates-panel .up-entry {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  #updates-panel .up-entry:last-child { margin-bottom: 0; }
+  #updates-panel .up-entry-head {
+    padding: 10px 14px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    flex-wrap: wrap;
+  }
+  #updates-panel .up-date { font-weight: 600; font-size: 13px; color: var(--text); font-family: 'JetBrains Mono', monospace; }
+  #updates-panel .up-base { font-size: 11px; color: var(--text-muted); }
+  #updates-panel .up-tally {
+    display: flex; gap: 10px; font-size: 11px; color: var(--text-soft); font-variant-numeric: tabular-nums;
+  }
+  #updates-panel .up-tally .t-add { color: #059669; font-weight: 600; }
+  #updates-panel .up-tally .t-drop { color: #dc2626; font-weight: 600; }
+  #updates-panel .up-note {
+    padding: 8px 14px; font-size: 11px; color: var(--text-soft); background: #fffbeb; border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  #updates-panel table.up-table {
+    width: 100%; border-collapse: collapse; font-size: 11px;
+  }
+  #updates-panel table.up-table thead th {
+    position: static; text-transform: none; letter-spacing: 0; font-size: 10px;
+    background: #ffffff; padding: 7px 10px; color: var(--text-muted); cursor: default;
+    font-weight: 600;
+  }
+  #updates-panel table.up-table tbody td {
+    padding: 6px 10px; border-top: 1px solid #f1f5f9; color: var(--text-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  #updates-panel table.up-table tbody td.src { color: var(--text); font-weight: 500; }
+  #updates-panel table.up-table tbody td.ch-add { color: #059669; font-weight: 600; text-align: right; }
+  #updates-panel table.up-table tbody td.ch-drop { color: #dc2626; font-weight: 600; text-align: right; }
+  #updates-panel table.up-table tbody td.ch-zero { color: var(--text-muted); text-align: right; }
+  #updates-panel table.up-table tbody td.ch-num { text-align: right; }
+  #updates-panel table.up-table tbody td.ch-warn { color: #d97706; font-style: italic; }
+  #updates-panel .up-diff { padding: 10px 14px 14px; }
+  #updates-panel .up-diff h4 {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); font-weight: 600; margin: 8px 0 6px;
+  }
+  #updates-panel .up-diff .diff-list {
+    display: flex; flex-direction: column; gap: 3px; font-size: 11px;
+  }
+  #updates-panel .up-diff .diff-item {
+    display: flex; gap: 8px; align-items: baseline;
+    padding: 3px 6px; border-radius: 4px;
+  }
+  #updates-panel .up-diff .diff-item .tag {
+    font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 3px; flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: 0.03em;
+  }
+  #updates-panel .up-diff .diff-item.add .tag { background: #d1fae5; color: #065f46; }
+  #updates-panel .up-diff .diff-item.drop .tag { background: #fee2e2; color: #991b1b; }
+  #updates-panel .up-diff .diff-item a { color: var(--accent); text-decoration: none; word-break: break-all; }
+  #updates-panel .up-diff .diff-item a:hover { text-decoration: underline; }
+  #updates-panel .up-diff .diff-src { color: var(--text-muted); font-size: 10px; margin-left: 4px; }
+  #updates-panel .up-empty {
+    padding: 24px; text-align: center; color: var(--text-muted); font-size: 12px;
+  }
 </style>
 </head>
 <body>
@@ -445,9 +581,25 @@
         <div><strong id="s-min">—</strong><span>USD/m² mín</span></div>
         <div><strong id="s-max">—</strong><span>USD/m² máx</span></div>
         <div><strong id="s-sup">—</strong><span>m² total</span></div>
-        <div><button id="export-csv">⬇ Exportar CSV</button></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button id="updates-btn" title="Cambios detectados en el último chequeo del scraping">🔔 Cambios <span class="badge" id="updates-badge">0</span></button>
+          <button id="export-csv">⬇ Exportar CSV</button>
+        </div>
       </div>
     </header>
+
+    <div id="updates-backdrop" role="dialog" aria-modal="true" aria-labelledby="updates-title">
+      <div id="updates-panel">
+        <div class="up-head">
+          <div>
+            <h2 id="updates-title">Actualizaciones del scraping</h2>
+            <div class="up-sub">Diferencias detectadas entre corridas de la tarea programada <span class="mono">daily-scraping</span>. Registro cronológico.</div>
+          </div>
+          <button class="up-close" id="updates-close" aria-label="Cerrar">×</button>
+        </div>
+        <div class="up-body" id="updates-body"></div>
+      </div>
+    </div>
 
     <div class="pills" id="pills">
       <span class="pills-label">Presets</span>
@@ -489,6 +641,7 @@
 </div>
 
 <script src="listings.js"></script>
+<script src="updates.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
 const zonColors = {
@@ -851,6 +1004,109 @@ document.getElementById('export-csv').addEventListener('click', () => {
 });
 
 render();
+
+// ============ Updates panel (changelog del scraping) ============
+(function () {
+  const UPDATES = Array.isArray(window.UPDATES) ? window.UPDATES : [];
+  const btn = document.getElementById('updates-btn');
+  const badge = document.getElementById('updates-badge');
+  const backdrop = document.getElementById('updates-backdrop');
+  const closeBtn = document.getElementById('updates-close');
+  const body = document.getElementById('updates-body');
+
+  // Badge = cambios reales (add+drop) del check más reciente, ignorando fuentes con nota (null).
+  let latestChanges = 0;
+  if (UPDATES.length) {
+    for (const f of Object.values(UPDATES[0].resumen_por_fuente || {})) {
+      if (typeof f.agregadas === 'number') latestChanges += f.agregadas;
+      if (typeof f.bajadas === 'number')   latestChanges += f.bajadas;
+    }
+  }
+  badge.textContent = latestChanges;
+  if (!latestChanges) badge.style.background = '#10b981';
+
+  function escHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function renderEntry(u) {
+    const fuentes = Object.entries(u.resumen_por_fuente || {});
+    let totalAdd = 0, totalDrop = 0;
+    for (const [, f] of fuentes) {
+      if (typeof f.agregadas === 'number') totalAdd += f.agregadas;
+      if (typeof f.bajadas === 'number')   totalDrop += f.bajadas;
+    }
+
+    const filas = fuentes.map(([src, f]) => {
+      const add = typeof f.agregadas === 'number'
+        ? (f.agregadas > 0 ? `<td class="ch-add">+${f.agregadas}</td>` : `<td class="ch-zero">0</td>`)
+        : `<td class="ch-warn">?</td>`;
+      const drop = typeof f.bajadas === 'number'
+        ? (f.bajadas > 0 ? `<td class="ch-drop">−${f.bajadas}</td>` : `<td class="ch-zero">0</td>`)
+        : `<td class="ch-warn">?</td>`;
+      const notaInline = f.nota ? `<div style="font-size:10px;color:#d97706;margin-top:2px;">${escHtml(f.nota)}</div>` : '';
+      return `<tr>
+        <td class="src">${escHtml(src)}${notaInline}</td>
+        <td class="ch-num">${f.snapshot ?? '—'}</td>
+        <td class="ch-num">${f.hoy ?? '—'}</td>
+        ${add}
+        ${drop}
+      </tr>`;
+    }).join('');
+
+    const diffs = (u.cambios || []).map(c => {
+      const cls = c.tipo === 'agregada' ? 'add' : 'drop';
+      const tag = c.tipo === 'agregada' ? 'ADD' : 'DROP';
+      const nota = c.nota ? `<div class="diff-src">${escHtml(c.nota)}</div>` : '';
+      return `<div class="diff-item ${cls}">
+        <span class="tag">${tag}</span>
+        <div style="flex:1;min-width:0;">
+          <a href="${escHtml(c.url)}" target="_blank" rel="noopener">${escHtml(c.url)}</a>
+          <span class="diff-src">${escHtml(c.fuente)}</span>
+          ${nota}
+        </div>
+      </div>`;
+    }).join('');
+
+    const notaBlock = u.nota ? `<div class="up-note">📝 ${escHtml(u.nota)}</div>` : '';
+
+    return `<div class="up-entry">
+      <div class="up-entry-head">
+        <div>
+          <div class="up-date">${escHtml(u.fecha)}</div>
+          <div class="up-base">Comparado contra snapshot <span class="mono">${escHtml(u.snapshot_base)}</span></div>
+        </div>
+        <div class="up-tally">
+          <span class="t-add">+${totalAdd} agregadas</span>
+          <span class="t-drop">−${totalDrop} bajadas</span>
+        </div>
+      </div>
+      ${notaBlock}
+      <table class="up-table">
+        <thead><tr>
+          <th>Fuente</th>
+          <th style="text-align:right;">Snap</th>
+          <th style="text-align:right;">Hoy</th>
+          <th style="text-align:right;">Altas</th>
+          <th style="text-align:right;">Bajas</th>
+        </tr></thead>
+        <tbody>${filas}</tbody>
+      </table>
+      ${diffs ? `<div class="up-diff"><h4>URLs cambiadas</h4><div class="diff-list">${diffs}</div></div>` : ''}
+    </div>`;
+  }
+
+  if (!UPDATES.length) {
+    body.innerHTML = '<div class="up-empty">Aún no hay chequeos registrados. El próximo run de <span class="mono">daily-scraping</span> agregará una entrada.</div>';
+  } else {
+    body.innerHTML = UPDATES.map(renderEntry).join('');
+  }
+
+  btn.addEventListener('click', () => backdrop.classList.add('open'));
+  closeBtn.addEventListener('click', () => backdrop.classList.remove('open'));
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') backdrop.classList.remove('open'); });
+})();
 </script>
 </body>
 </html>
