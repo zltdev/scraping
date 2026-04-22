@@ -1,0 +1,11 @@
+{
+  "portal": "pueblo_vaca_muerta",
+  "localidad_query": "Senillosa (Vaca Muerta)",
+  "url_origen": "https://vacamuertanews.com/actualidad/pueblo-vaca-muerta-un-proyecto-inmobiliario-revolucionario-en-el-corazon-de-la-produccion-energetica.htm",
+  "fecha_scrape": "2026-04-20",
+  "nota": "Desarrollo 'Pueblo Vaca Muerta' en Senillosa, próximo a lagos Barreales y Mari Menuco. 196 lotes de 5ha + 112 lotes de 1ha, titulados, calles cedidas al municipio. Financiación hasta 360 cuotas. Registrado como 2 tipologías representativas (no listing individual — no hay URL por lote).",
+  "listings": [
+    {"url":"https://vacamuertanews.com/actualidad/pueblo-vaca-muerta#tipologia-1ha","titulo":"Pueblo Vaca Muerta - Lote 1 hectárea (tipología)","localidad":"Senillosa","direccion_o_zona":"Senillosa, zona Vaca Muerta","superficie_m2":10000,"precio":25000,"moneda":"USD","descripcion":"Loteo Pueblo Vaca Muerta. 112 lotes de 1 ha disponibles. Titulados con escritura. Anticipo USD 6.000-7.000 + hasta 360 cuotas de USD 500-600/mes. Zona agroproductiva/agroindustrial/residencial cerca lagos Barreales y Mari Menuco.","servicios":["calles cedidas al municipio"],"zonificacion":"mixta","escritura":"sí","vendedor":"Pueblo Vaca Muerta (desarrollador)","operacion":"venta","nota":"tipología representativa del desarrollo completo, no lote individual"},
+    {"url":"https://vacamuertanews.com/actualidad/pueblo-vaca-muerta#tipologia-5ha","titulo":"Pueblo Vaca Muerta - Lote 5 hectáreas (tipología)","localidad":"Senillosa","direccion_o_zona":"Senillosa, zona Vaca Muerta","superficie_m2":50000,"precio":50000,"moneda":"USD","descripcion":"Loteo Pueblo Vaca Muerta. 196 lotes de 5 ha. Titulados. Financiación pesos o dólares. Desde USD 50.000 por lote.","servicios":["calles cedidas al municipio"],"zonificacion":"rural","escritura":"sí","vendedor":"Pueblo Vaca Muerta (desarrollador)","operacion":"venta","nota":"tipología representativa del desarrollo completo, no lote individual"}
+  ]
+}

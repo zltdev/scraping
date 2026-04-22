@@ -1,0 +1,9 @@
+{
+  "portal": "argenprop",
+  "localidad_query": "Añelo (listings individuales extra)",
+  "fecha_scrape": "2026-04-20",
+  "nota": "Listing adicional encontrado via búsqueda directa. Posiblemente misma oferta que 16701504 (6ha, mismo parque) re-listada con precio concreto.",
+  "listings": [
+    {"url":"https://www.argenprop.com/terreno-en-venta-en-anelo--17603144","titulo":"Terreno 6 hectáreas Parque Industrial de Añelo","localidad":"Añelo","direccion_o_zona":"Parque Industrial Añelo Vaca Muerta","superficie_m2":60000,"precio":1200000,"moneda":"USD","descripcion":"6 hectáreas dentro del Parque Industrial de Añelo. Excelente ubicación. Cuenta con escritura.","servicios":[],"zonificacion":"industrial","escritura":"sí","vendedor":"Solar Urbano Inversiones Inmobiliarias","duplicado_de":"https://www.argenprop.com/terreno-en-venta-en-anelo--16701504"}
+  ]
+}

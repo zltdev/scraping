@@ -1,0 +1,10 @@
+{
+  "portal": "argenprop",
+  "localidad_query": "Cutral Có",
+  "url_origen": "https://www.argenprop.com/terrenos/venta/cutral-co",
+  "fecha_scrape": "2026-04-20",
+  "nota": "Solo 1 listing visible en esta página. Cutral Có tiene poca oferta pública de terrenos en argenprop.",
+  "listings": [
+    {"url":"https://www.argenprop.com/terreno-en-venta-en-cutral-co--19445576","titulo":"Terreno Barrio Zani 250m²","localidad":"Cutral Có","direccion_o_zona":"Río Lileo, Barrio Zani","superficie_m2":250,"precio":32000,"moneda":"USD","descripcion":"Lote 250 m² en barrio Zani. Entre Río Kiká y Río Chimehuin. Servicios: luz, gas, agua, cloacas. Impuestos al día. Escritura disponible.","servicios":["luz","gas","agua","cloacas"],"zonificacion":"residencial","escritura":"sí","vendedor":"RE/MAX - Eliana Montañes"}
+  ]
+}

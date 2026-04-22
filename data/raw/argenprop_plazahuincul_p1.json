@@ -1,0 +1,14 @@
+{
+  "portal": "argenprop",
+  "localidad_query": "Plaza Huincul",
+  "url_origen": "https://www.argenprop.com/terrenos/venta/plaza-huincul",
+  "fecha_scrape": "2026-04-20",
+  "nota": "Todos los listings del mismo corredor (Gabriel López Mat. 380). Plaza Huincul tiene poca oferta pública.",
+  "listings": [
+    {"url":"https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19397797","titulo":"Lote 4870m² Av. Schreiber y Mariano Moreno","localidad":"Plaza Huincul","direccion_o_zona":"Av. Schreiber y Av. Mariano Moreno (RP 17)","superficie_m2":4870,"precio":278000,"moneda":"USD","descripcion":"Terreno esquina en intersección Av. Schreiber y Mariano Moreno (RP 17). Oasis arbolado. 117 m² cubiertos (casa).","servicios":["electricidad","gas natural","cloacas","agua corriente"],"zonificacion":"mixta","vendedor":"Gabriel López Mat. 380 - Exequiel Alvarez"},
+    {"url":"https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19420933","titulo":"Lote 391m² Av. Mariano Moreno","localidad":"Plaza Huincul","direccion_o_zona":"Av. Mariano Moreno 600","superficie_m2":392,"precio":28000,"moneda":"USD","descripcion":"Terreno 391,84 m² lote 3a 6. Av. principal casi Schreiber. Conecta con Cutral Có.","servicios":["luz","gas","agua","cloacas"],"zonificacion":"residencial","vendedor":"Gabriel López Mat. 380 - Exequiel Alvarez"},
+    {"url":"https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19420934","titulo":"Lote 348m² Av. Mariano Moreno","localidad":"Plaza Huincul","direccion_o_zona":"Av. Mariano Moreno 600","superficie_m2":348,"precio":26000,"moneda":"USD","descripcion":"Terreno 348,38 m² lote 3a 5. Av. principal.","servicios":["luz","gas","agua","cloacas"],"zonificacion":"residencial","vendedor":"Gabriel López Mat. 380 - Exequiel Alvarez"},
+    {"url":"https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19420935","titulo":"Lote 305m² Mariano Moreno","localidad":"Plaza Huincul","direccion_o_zona":"Mariano Moreno 600","superficie_m2":305,"precio":23000,"moneda":"USD","descripcion":"Terreno 304,93 m² lote 3a 4. Av. principal.","servicios":["luz","gas","agua","cloacas"],"zonificacion":"residencial","vendedor":"Gabriel López Mat. 380 - Exequiel Alvarez"},
+    {"url":"https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19420972","titulo":"Terreno 713m² con construcción avanzada","localidad":"Plaza Huincul","direccion_o_zona":"Lote 59 Mza P, Benente y Hermosilla","superficie_m2":713,"precio":37000,"moneda":"USD","descripcion":"Terreno 713 m² con construcción tradicional 176 m² cubiertos (40% avance). 2 habitaciones proyectadas.","servicios":["luz","gas","agua","cloacas"],"zonificacion":"residencial","vendedor":"Gabriel López Mat. 380 / RE/MAX Vanina López Mat. 811"}
+  ]
+}

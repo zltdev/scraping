@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visor Terrenos · Vaca Muerta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<style>
+  :root {
+    --bg: #fafbfc;
+    --bg-dark: #0f172a;
+    --bg-darker: #020617;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0f172a;
+    --text-soft: #475569;
+    --text-muted: #94a3b8;
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --shadow-sm: 0 1px 2px rgba(15,23,42,0.04), 0 1px 3px rgba(15,23,42,0.06);
+    --shadow: 0 4px 6px -1px rgba(15,23,42,0.08), 0 2px 4px -2px rgba(15,23,42,0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(15,23,42,0.1), 0 4px 6px -4px rgba(15,23,42,0.08);
+    --radius: 8px;
+    --radius-lg: 12px;
+
+    --zon-industrial: #dc2626;
+    --zon-mixta: #ea580c;
+    --zon-comercial: #9333ea;
+    --zon-residencial: #2563eb;
+    --zon-rural: #059669;
+    --zon-null: #64748b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; color: var(--text); background: var(--bg); font-feature-settings: 'cv02','cv03','cv04','cv11'; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  .app { display: grid; grid-template-columns: 300px 1fr; height: 100vh; }
+
+  /* ============ SIDEBAR ============ */
+  aside {
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 18px 16px;
+  }
+  aside::-webkit-scrollbar { width: 6px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+  .brand { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .brand .dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #6366f1, #8b5cf6); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; box-shadow: 0 2px 8px rgba(99,102,241,0.3); }
+  .brand h1 { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+  .brand .sub { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
+
+  aside h3 {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin: 18px 0 8px;
+  }
+  aside h3:first-child { margin-top: 0; }
+
+  aside .group { padding-bottom: 4px; margin-bottom: 4px; }
+
+  aside label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 6px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px;
+    transition: background 0.12s;
+  }
+  aside label:hover { background: #f1f5f9; }
+  aside label input { cursor: pointer; accent-color: var(--accent); }
+
+  aside .count {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--text-muted);
+    background: #f1f5f9;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  aside input[type="search"],
+  aside input[type="number"] {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: inherit;
+    background: white;
+    transition: border-color 0.12s, box-shadow 0.12s;
+  }
+  aside input[type="search"]:focus,
+  aside input[type="number"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+  }
+  aside .range { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+
+  aside button.reset {
+    width: 100%;
+    margin-top: 16px;
+    padding: 9px;
+    border: 1px solid var(--border-strong);
+    background: white;
+    color: var(--text-soft);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  aside button.reset:hover { border-color: #dc2626; color: #dc2626; background: #fef2f2; }
+
+  /* ============ MAIN ============ */
+  main { display: grid; grid-template-rows: auto auto 1fr; min-height: 0; overflow: hidden; }
+
+  /* Header */
+  header.topbar {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.topbar::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; width: 400px; height: 100%;
+    background: radial-gradient(circle at 70% 50%, rgba(99,102,241,0.12), transparent 60%);
+    pointer-events: none;
+  }
+  header.topbar .title h1 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  header.topbar .meta {
+    font-size: 10px;
+    color: #94a3b8;
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  header.topbar .stats { display: flex; gap: 18px; position: relative; }
+  header.topbar .stats > div {
+    padding: 0 14px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  header.topbar .stats > div:last-child { border-right: none; padding-right: 0; }
+  header.topbar .stats strong {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  header.topbar .stats span {
+    font-size: 10px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  header.topbar #export-csv {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: inherit;
+    display: flex; align-items: center; gap: 6px;
+    transition: all 0.15s;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.3);
+  }
+  header.topbar #export-csv:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.4); }
+
+  /* Pills */
+  .pills {
+    display: flex; gap: 6px; padding: 10px 20px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .pills-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; margin-right: 4px; }
+  .pill {
+    font-size: 11px; padding: 5px 11px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: white;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-soft);
+    transition: all 0.12s;
+    user-select: none;
+  }
+  .pill:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .pill.active {
+    background: var(--text);
+    color: white; border-color: var(--text);
+    box-shadow: 0 2px 6px rgba(15,23,42,0.2);
+  }
+
+  .map-toggle {
+    margin-left: auto; display: flex; gap: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .map-toggle button {
+    background: white; border: none; padding: 5px 10px;
+    font-size: 11px; cursor: pointer; font-family: inherit;
+    color: var(--text-soft);
+    transition: all 0.12s;
+  }
+  .map-toggle button.active { background: var(--text); color: white; }
+
+  /* Map + Table split */
+  .split { display: grid; grid-template-rows: minmax(0, 1fr) 40vh; min-height: 0; }
+  #map { position: relative; width: 100%; height: 100%; background: #1a2338; }
+  .leaflet-container { font-family: inherit; }
+
+  /* Legend */
+  .legend-box {
+    position: absolute; bottom: 14px; right: 14px;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    font-size: 11px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    min-width: 160px;
+  }
+  .legend-box h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; }
+  .legend-box .item { display: flex; align-items: center; gap: 8px; padding: 2px 0; color: var(--text); }
+  .legend-box .dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,0.15); flex-shrink: 0; }
+  .legend-sizes { display: flex; align-items: flex-end; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .legend-sizes .size { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 9px; color: var(--text-muted); }
+  .legend-sizes .size-dot { background: #94a3b8; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 1px rgba(0,0,0,0.15); }
+
+  /* Custom markers */
+  .marker-svg { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25)); transition: transform 0.15s; cursor: pointer; }
+  .marker-svg:hover { transform: scale(1.25); filter: drop-shadow(0 4px 8px rgba(0,0,0,0.35)); z-index: 1000; }
+  .marker-flag { animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.15; }
+  }
+
+  /* Popup */
+  .leaflet-popup-content-wrapper { border-radius: var(--radius); padding: 0; box-shadow: var(--shadow-lg); }
+  .leaflet-popup-content { margin: 0 !important; padding: 14px 16px; font-size: 12px; line-height: 1.5; min-width: 240px; font-family: inherit; }
+  .leaflet-popup-tip { box-shadow: var(--shadow); }
+  .pop-title { font-weight: 600; font-size: 13px; margin-bottom: 4px; color: var(--text); letter-spacing: -0.01em; line-height: 1.3; }
+  .pop-chips { margin: 6px 0; display: flex; gap: 4px; flex-wrap: wrap; }
+  .pop-row { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; padding: 2px 0; color: var(--text-soft); }
+  .pop-row b { color: var(--text); font-weight: 500; }
+  .pop-meta { font-size: 10px; color: var(--text-muted); margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
+  .pop-cta { margin-top: 10px; display: inline-block; background: var(--accent); color: white !important; text-decoration: none; padding: 6px 12px; border-radius: 5px; font-size: 11px; font-weight: 500; transition: all 0.12s; }
+  .pop-cta:hover { background: var(--accent-hover); }
+
+  /* Table */
+  .table-wrap { overflow: auto; min-height: 0; background: var(--card); border-top: 1px solid var(--border); }
+  .table-wrap::-webkit-scrollbar { width: 8px; height: 8px; }
+  .table-wrap::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  thead th {
+    position: sticky; top: 0;
+    background: #f8fafc;
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-soft);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  thead th:hover { background: #f1f5f9; color: var(--text); }
+  thead th.sorted { color: var(--accent); }
+  thead th.sorted::after { content: ' ↓'; font-size: 10px; }
+  thead th.sorted.asc::after { content: ' ↑'; }
+  tbody tr { border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: background 0.1s; }
+  tbody tr:hover { background: #eef2ff; }
+  tbody tr.highlight { background: #fef3c7 !important; }
+  tbody tr.dup td { opacity: 0.5; }
+  tbody td { padding: 7px 10px; vertical-align: middle; }
+  tbody td.num { text-align: right; font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; font-size: 11px; }
+  tbody td.title { max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); font-weight: 500; }
+  tbody td.servicios span {
+    display: inline-block;
+    background: #f1f5f9;
+    color: var(--text-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    margin: 1px 2px 1px 0;
+    font-weight: 500;
+  }
+  tbody a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  tbody a:hover { text-decoration: underline; }
+
+  /* Chips for zonificacion */
+  .chip {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+  }
+  .chip.industrial { background: var(--zon-industrial); }
+  .chip.mixta { background: var(--zon-mixta); }
+  .chip.comercial { background: var(--zon-comercial); }
+  .chip.residencial { background: var(--zon-residencial); }
+  .chip.rural { background: var(--zon-rural); }
+  .chip.null { background: var(--zon-null); }
+  .chip.flag {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    box-shadow: 0 1px 3px rgba(220,38,38,0.4);
+  }
+  .chip.flag::before { content: '★ '; }
+  .chip.dup { background: #64748b; opacity: 0.7; }
+
+  .empty { padding: 60px 20px; text-align: center; color: var(--text-muted); font-size: 13px; }
+  .empty::before { content: '∅'; display: block; font-size: 36px; margin-bottom: 8px; opacity: 0.4; }
+
+  /* Fade-in */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  tbody tr { animation: fadeIn 0.25s ease-out; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand">
+      <div class="dot">V</div>
+      <div>
+        <h1>Vaca Muerta</h1>
+        <div class="sub">Terrenos / Inteligencia</div>
+      </div>
+    </div>
+
+    <div class="group">
+      <input type="search" id="q" placeholder="🔍 Buscar (título, dirección, vendedor…)">
+    </div>
+
+    <div class="group">
+      <h3>Localidad</h3>
+      <div id="f-localidad"></div>
+    </div>
+
+    <div class="group">
+      <h3>Zonificación</h3>
+      <div id="f-zonificacion"></div>
+    </div>
+
+    <div class="group">
+      <h3>Portal</h3>
+      <div id="f-portal"></div>
+    </div>
+
+    <div class="group">
+      <h3>Precio USD</h3>
+      <div class="range">
+        <input type="number" id="precio-min" placeholder="Mín">
+        <input type="number" id="precio-max" placeholder="Máx">
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>Superficie m²</h3>
+      <div class="range">
+        <input type="number" id="sup-min" placeholder="Mín">
+        <input type="number" id="sup-max" placeholder="Máx">
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>USD/m²</h3>
+      <div class="range">
+        <input type="number" id="usd-min" placeholder="Mín">
+        <input type="number" id="usd-max" placeholder="Máx">
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>Servicios mínimos</h3>
+      <div id="f-servicios"></div>
+    </div>
+
+    <div class="group">
+      <h3>Otros</h3>
+      <label><input type="checkbox" id="only-industrial"> Solo industriales relevantes</label>
+      <label><input type="checkbox" id="only-precio"> Solo con precio</label>
+      <label><input type="checkbox" id="only-sup"> Solo con superficie</label>
+      <label><input type="checkbox" id="only-usdm2"> Solo con USD/m²</label>
+      <label><input type="checkbox" id="only-escritura"> Con escritura</label>
+      <label><input type="checkbox" id="excl-dup" checked> Excluir duplicados</label>
+    </div>
+
+    <button class="reset" id="reset">↺  Reset filtros</button>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div class="title">
+        <h1>Inteligencia de Terrenos · Vaca Muerta</h1>
+        <div class="meta" id="meta"></div>
+      </div>
+      <div class="stats">
+        <div><strong id="s-total">0</strong><span>listings</span></div>
+        <div><strong id="s-mediana">—</strong><span>USD/m² mediana</span></div>
+        <div><strong id="s-min">—</strong><span>USD/m² mín</span></div>
+        <div><strong id="s-max">—</strong><span>USD/m² máx</span></div>
+        <div><strong id="s-sup">—</strong><span>m² total</span></div>
+        <div><button id="export-csv">⬇ Exportar CSV</button></div>
+      </div>
+    </header>
+
+    <div class="pills" id="pills">
+      <span class="pills-label">Presets</span>
+      <span class="pill" data-preset="industrial">⚙ Industriales</span>
+      <span class="pill" data-preset="grandes">▣ Superficie &gt; 5.000 m²</span>
+      <span class="pill" data-preset="nodo">● Nodo Las Cortaderas</span>
+      <span class="pill" data-preset="pi-anelo">◆ Parque Industrial Añelo</span>
+      <span class="pill" data-preset="baratos">$ USD/m² &lt; 50</span>
+      <span class="pill" data-preset="hectareas">◈ &gt;1 hectárea</span>
+      <div class="map-toggle">
+        <button id="map-light" class="active">Claro</button>
+        <button id="map-dark">Oscuro</button>
+      </div>
+    </div>
+
+    <div class="split">
+      <div id="map"></div>
+      <div class="table-wrap">
+        <table id="tbl">
+          <thead><tr>
+            <th data-sort="portal">Portal</th>
+            <th data-sort="localidad">Localidad</th>
+            <th data-sort="titulo">Título</th>
+            <th data-sort="zonificacion">Zon.</th>
+            <th data-sort="superficie_m2" class="num">Sup m²</th>
+            <th data-sort="precio_usd" class="num">USD</th>
+            <th data-sort="precio_m2_usd" class="num">USD/m²</th>
+            <th data-sort="distancia_anelo_km" class="num">km a Añelo</th>
+            <th data-sort="servicios">Servicios</th>
+            <th data-sort="vendedor">Vendedor</th>
+            <th>Link</th>
+          </tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+        <div class="empty" id="empty" style="display:none">No hay listings que cumplan los filtros.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="listings.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+const zonColors = {
+  industrial: '#dc2626', mixta: '#ea580c', comercial: '#9333ea',
+  residencial: '#2563eb', rural: '#059669', null: '#64748b', undefined: '#64748b'
+};
+
+const L_data = window.LISTINGS || [];
+const META = window.METADATA || {};
+
+document.getElementById('meta').textContent =
+  `TC blue ${META.tc_usd_blue_venta} · ${META.fuente_tc} · scrape ${META.fecha_scrape} · ${L_data.length} listings consolidados`;
+
+function uniqueCounts(arr, key) {
+  const m = new Map();
+  for (const r of arr) {
+    const v = r[key];
+    if (v == null || v === '') continue;
+    m.set(v, (m.get(v) || 0) + 1);
+  }
+  return [...m.entries()].sort((a, b) => b[1] - a[1]);
+}
+
+function makeCheckboxes(containerId, values, name) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  for (const [v, c] of values) {
+    el.insertAdjacentHTML('beforeend',
+      `<label><input type="checkbox" name="${name}" value="${encodeURIComponent(v)}"><span>${v}</span><span class="count">${c}</span></label>`);
+  }
+}
+
+makeCheckboxes('f-localidad', uniqueCounts(L_data, 'localidad'), 'localidad');
+makeCheckboxes('f-zonificacion', uniqueCounts(L_data, 'zonificacion'), 'zonificacion');
+makeCheckboxes('f-portal', uniqueCounts(L_data, 'portal'), 'portal');
+
+const serviciosCatalog = ['luz','electricidad','agua','gas','cloacas','cloaca','asfalto','internet','seguridad','alumbrado público'];
+const serviciosEl = document.getElementById('f-servicios');
+for (const s of serviciosCatalog) {
+  serviciosEl.insertAdjacentHTML('beforeend',
+    `<label><input type="checkbox" name="servicios" value="${s}"><span>${s}</span></label>`);
+}
+
+// ============ MAP ============
+const map = L.map('map', { zoomControl: true, attributionControl: true }).setView([-38.6, -68.5], 8);
+
+const tileLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd', maxZoom: 19
+});
+const tileDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd', maxZoom: 19
+});
+tileLight.addTo(map);
+
+// Legend
+const legend = L.control({ position: 'bottomright' });
+legend.onAdd = () => {
+  const div = L.DomUtil.create('div', 'legend-box');
+  div.innerHTML = `
+    <h4>Zonificación</h4>
+    ${Object.entries(zonColors).filter(([k]) => k && k !== 'undefined' && k !== 'null').map(([k, c]) =>
+      `<div class="item"><span class="dot" style="background:${c}"></span>${k}</div>`).join('')}
+    <div class="item"><span class="dot" style="background:${zonColors.null}"></span>sin dato</div>
+    <div class="legend-sizes">
+      <div class="size"><span class="size-dot" style="width:8px;height:8px"></span>&lt;1k</div>
+      <div class="size"><span class="size-dot" style="width:14px;height:14px"></span>1-10k</div>
+      <div class="size"><span class="size-dot" style="width:22px;height:22px"></span>&gt;10k m²</div>
+    </div>`;
+  return div;
+};
+legend.addTo(map);
+
+let markerLayer = L.layerGroup().addTo(map);
+let sortKey = 'precio_m2_usd';
+let sortAsc = true;
+let currentPreset = null;
+
+function getFilters() {
+  const q = document.getElementById('q').value.toLowerCase().trim();
+  const get = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(x => decodeURIComponent(x.value));
+  return {
+    q,
+    localidad: get('localidad'),
+    zonificacion: get('zonificacion'),
+    portal: get('portal'),
+    servicios: get('servicios'),
+    precioMin: +document.getElementById('precio-min').value || null,
+    precioMax: +document.getElementById('precio-max').value || null,
+    supMin: +document.getElementById('sup-min').value || null,
+    supMax: +document.getElementById('sup-max').value || null,
+    usdMin: +document.getElementById('usd-min').value || null,
+    usdMax: +document.getElementById('usd-max').value || null,
+    onlyIndustrial: document.getElementById('only-industrial').checked,
+    onlyPrecio: document.getElementById('only-precio').checked,
+    onlySup: document.getElementById('only-sup').checked,
+    onlyUsdm2: document.getElementById('only-usdm2').checked,
+    onlyEscritura: document.getElementById('only-escritura').checked,
+    exclDup: document.getElementById('excl-dup').checked
+  };
+}
+
+function applyPreset(rec) {
+  if (!currentPreset) return true;
+  if (currentPreset === 'industrial') return rec.industrial_relevante;
+  if (currentPreset === 'grandes') return rec.superficie_m2 && rec.superficie_m2 > 5000;
+  if (currentPreset === 'nodo') return (rec.titulo || '').toLowerCase().includes('nodo las cortaderas');
+  if (currentPreset === 'pi-anelo') {
+    const t = ((rec.titulo || '') + ' ' + (rec.direccion_o_zona || '')).toLowerCase();
+    return rec.localidad === 'Añelo' && (t.includes('parque industrial') || t.includes('ruta 17') || t.includes('ruta 7'));
+  }
+  if (currentPreset === 'baratos') return rec.precio_m2_usd != null && rec.precio_m2_usd < 50;
+  if (currentPreset === 'hectareas') return rec.superficie_m2 && rec.superficie_m2 >= 10000;
+  return true;
+}
+
+function matchServicios(rec, required) {
+  if (!required.length) return true;
+  const have = (rec.servicios || []).map(s => s.toLowerCase());
+  return required.every(r => have.some(h => h.includes(r.toLowerCase())));
+}
+
+function filter(records) {
+  const f = getFilters();
+  return records.filter(r => {
+    if (f.exclDup && r.duplicado_de) return false;
+    if (f.onlyIndustrial && !r.industrial_relevante) return false;
+    if (f.onlyPrecio && !r.precio) return false;
+    if (f.onlySup && !r.superficie_m2) return false;
+    if (f.onlyUsdm2 && !r.precio_m2_usd) return false;
+    if (f.onlyEscritura && r.escritura !== 'sí') return false;
+    if (f.localidad.length && !f.localidad.includes(r.localidad)) return false;
+    if (f.zonificacion.length && !f.zonificacion.includes(r.zonificacion)) return false;
+    if (f.portal.length && !f.portal.includes(r.portal)) return false;
+    if (!matchServicios(r, f.servicios)) return false;
+    if (f.precioMin != null && (!r.precio_usd || r.precio_usd < f.precioMin)) return false;
+    if (f.precioMax != null && (!r.precio_usd || r.precio_usd > f.precioMax)) return false;
+    if (f.supMin != null && (!r.superficie_m2 || r.superficie_m2 < f.supMin)) return false;
+    if (f.supMax != null && (!r.superficie_m2 || r.superficie_m2 > f.supMax)) return false;
+    if (f.usdMin != null && (!r.precio_m2_usd || r.precio_m2_usd < f.usdMin)) return false;
+    if (f.usdMax != null && (!r.precio_m2_usd || r.precio_m2_usd > f.usdMax)) return false;
+    if (f.q) {
+      const blob = `${r.titulo||''} ${r.direccion_o_zona||''} ${r.vendedor||''} ${r.descripcion||''} ${r.localidad||''}`.toLowerCase();
+      if (!blob.includes(f.q)) return false;
+    }
+    if (!applyPreset(r)) return false;
+    return true;
+  });
+}
+
+function median(arr) {
+  if (!arr.length) return null;
+  const s = [...arr].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+
+function fmt(n, d = 0) {
+  if (n == null || isNaN(n)) return '—';
+  return n.toLocaleString('es-AR', { minimumFractionDigits: d, maximumFractionDigits: d });
+}
+
+function markerSize(sup) {
+  if (!sup) return 9;
+  // Log-scale between 9 (small) and 26 (huge)
+  const v = Math.log10(Math.max(100, sup)) * 3.6;
+  return Math.max(9, Math.min(26, v));
+}
+
+function buildMarkerSVG(r) {
+  const color = zonColors[r.zonificacion] || zonColors.null;
+  const size = markerSize(r.superficie_m2);
+  const halo = r.industrial_relevante ? size + 10 : 0;
+  const dashed = r.coord_estimada;
+  const totalSize = halo || size + 4;
+  const c = totalSize / 2;
+
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" class="marker-svg" width="${totalSize}" height="${totalSize}" viewBox="0 0 ${totalSize} ${totalSize}">`;
+  if (halo) {
+    svg += `<circle class="marker-flag" cx="${c}" cy="${c}" r="${halo/2 - 1}" fill="${color}" opacity="0.3"/>`;
+  }
+  svg += `<circle cx="${c}" cy="${c}" r="${size/2}" fill="${color}" stroke="${dashed ? 'rgba(255,255,255,0.7)' : '#ffffff'}" stroke-width="2" ${dashed ? 'stroke-dasharray="2,1.5"' : ''}/>`;
+  svg += `<circle cx="${c}" cy="${c}" r="${Math.max(1.5, size/6)}" fill="#ffffff" opacity="0.6"/>`;
+  svg += `</svg>`;
+  return { svg, size: totalSize };
+}
+
+function renderMap(records) {
+  markerLayer.clearLayers();
+  const sorted = [...records].sort((a, b) => (b.superficie_m2 || 0) - (a.superficie_m2 || 0));
+  for (const r of sorted) {
+    const { svg, size } = buildMarkerSVG(r);
+    const icon = L.divIcon({
+      html: svg,
+      className: 'marker-container',
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2]
+    });
+    const marker = L.marker([r.lat, r.lon], { icon, riseOnHover: true });
+    const chips = [
+      `<span class="chip ${r.zonificacion || 'null'}">${r.zonificacion || 'sin zon.'}</span>`,
+      r.industrial_relevante ? '<span class="chip flag">ind</span>' : '',
+      r.duplicado_de ? '<span class="chip dup">dup</span>' : ''
+    ].filter(Boolean).join('');
+    const popup = `
+      <div class="pop-title">${r.titulo || '(sin título)'}</div>
+      <div class="pop-chips">${chips}</div>
+      <div class="pop-row"><span>Localidad</span><b>${r.localidad || '—'}</b></div>
+      <div class="pop-row"><span>Dirección</span><b style="text-align:right">${r.direccion_o_zona || '—'}</b></div>
+      <div class="pop-row"><span>Superficie</span><b class="mono">${fmt(r.superficie_m2)} m²</b></div>
+      <div class="pop-row"><span>Precio</span><b class="mono">${r.precio_usd ? 'USD ' + fmt(r.precio_usd) : '—'}</b></div>
+      <div class="pop-row"><span>USD/m²</span><b class="mono">${r.precio_m2_usd ? fmt(r.precio_m2_usd, 1) : '—'}</b></div>
+      <div class="pop-row"><span>Distancia Añelo</span><b class="mono">${r.distancia_anelo_km} km</b></div>
+      <div class="pop-meta">
+        Servicios: ${(r.servicios || []).join(', ') || '—'}<br>
+        Vendedor: ${r.vendedor || '—'}${r.coord_estimada ? ' · <i>coord. estimada</i>' : ''}
+      </div>
+      <a class="pop-cta" href="${r.url}" target="_blank" rel="noopener">Abrir aviso  ↗</a>`;
+    marker.bindPopup(popup, { maxWidth: 320, minWidth: 240 });
+    marker._recId = r.id;
+    marker.on('click', () => highlightRow(r.id));
+    marker.addTo(markerLayer);
+  }
+}
+
+function renderTable(records) {
+  const sorted = [...records].sort((a, b) => {
+    const va = a[sortKey], vb = b[sortKey];
+    if (va == null && vb == null) return 0;
+    if (va == null) return 1;
+    if (vb == null) return -1;
+    if (typeof va === 'number') return sortAsc ? va - vb : vb - va;
+    return sortAsc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+  });
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+  for (const r of sorted) {
+    const tr = document.createElement('tr');
+    tr.dataset.id = r.id;
+    if (r.duplicado_de) tr.classList.add('dup');
+    tr.innerHTML = `
+      <td>${r.portal || ''}</td>
+      <td>${r.localidad || ''}</td>
+      <td class="title" title="${(r.titulo || '').replace(/"/g, '&quot;')}">${r.titulo || ''}${r.industrial_relevante ? ' <span class="chip flag">ind</span>' : ''}</td>
+      <td><span class="chip ${r.zonificacion || 'null'}">${r.zonificacion || '—'}</span></td>
+      <td class="num">${fmt(r.superficie_m2)}</td>
+      <td class="num">${r.precio_usd ? fmt(r.precio_usd) : '—'}</td>
+      <td class="num">${r.precio_m2_usd ? fmt(r.precio_m2_usd, 1) : '—'}</td>
+      <td class="num">${r.distancia_anelo_km}</td>
+      <td class="servicios">${(r.servicios || []).map(s => `<span>${s}</span>`).join('')}</td>
+      <td>${r.vendedor || ''}</td>
+      <td><a href="${r.url}" target="_blank" rel="noopener">↗</a></td>`;
+    tr.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') return;
+      map.flyTo([r.lat, r.lon], 13, { duration: 0.6 });
+      highlightRow(r.id);
+      for (const layer of markerLayer.getLayers()) {
+        if (layer._recId === r.id) setTimeout(() => layer.openPopup(), 650);
+      }
+    });
+    tbody.appendChild(tr);
+  }
+  document.getElementById('empty').style.display = sorted.length ? 'none' : 'block';
+  document.querySelectorAll('thead th').forEach(th => {
+    th.classList.remove('sorted', 'asc');
+    if (th.dataset.sort === sortKey) {
+      th.classList.add('sorted');
+      if (sortAsc) th.classList.add('asc');
+    }
+  });
+}
+
+function highlightRow(id) {
+  document.querySelectorAll('tbody tr').forEach(tr => {
+    tr.classList.toggle('highlight', tr.dataset.id === id);
+    if (tr.dataset.id === id) tr.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+}
+
+function updateStats(records) {
+  document.getElementById('s-total').textContent = records.length;
+  const usds = records.map(r => r.precio_m2_usd).filter(x => x != null && x > 0.5 && x < 500);
+  const med = median(usds);
+  document.getElementById('s-mediana').textContent = med ? fmt(med, 1) : '—';
+  document.getElementById('s-min').textContent = usds.length ? fmt(Math.min(...usds), 1) : '—';
+  document.getElementById('s-max').textContent = usds.length ? fmt(Math.max(...usds), 1) : '—';
+  const sup = records.map(r => r.superficie_m2).filter(x => x).reduce((a, b) => a + b, 0);
+  document.getElementById('s-sup').textContent = sup ? fmt(sup) : '—';
+}
+
+function render() {
+  const filtered = filter(L_data);
+  renderMap(filtered);
+  renderTable(filtered);
+  updateStats(filtered);
+}
+
+document.querySelectorAll('aside input').forEach(el => {
+  el.addEventListener(el.type === 'checkbox' ? 'change' : 'input', render);
+});
+document.getElementById('reset').addEventListener('click', () => {
+  document.querySelectorAll('aside input[type="checkbox"]').forEach(c => c.checked = c.id === 'excl-dup');
+  document.querySelectorAll('aside input[type="search"], aside input[type="number"]').forEach(c => c.value = '');
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  currentPreset = null;
+  render();
+});
+
+document.querySelectorAll('thead th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const k = th.dataset.sort;
+    if (sortKey === k) sortAsc = !sortAsc;
+    else { sortKey = k; sortAsc = ['titulo','localidad','portal','vendedor','zonificacion','servicios'].includes(k); }
+    render();
+  });
+});
+
+document.querySelectorAll('.pill').forEach(p => {
+  p.addEventListener('click', () => {
+    const preset = p.dataset.preset;
+    if (currentPreset === preset) {
+      currentPreset = null;
+      p.classList.remove('active');
+    } else {
+      document.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      currentPreset = preset;
+    }
+    render();
+  });
+});
+
+document.getElementById('map-light').addEventListener('click', () => {
+  map.removeLayer(tileDark); tileLight.addTo(map);
+  document.getElementById('map-light').classList.add('active');
+  document.getElementById('map-dark').classList.remove('active');
+});
+document.getElementById('map-dark').addEventListener('click', () => {
+  map.removeLayer(tileLight); tileDark.addTo(map);
+  document.getElementById('map-dark').classList.add('active');
+  document.getElementById('map-light').classList.remove('active');
+});
+
+document.getElementById('export-csv').addEventListener('click', () => {
+  const filtered = filter(L_data);
+  const cols = ['portal','localidad','titulo','direccion_o_zona','zonificacion','superficie_m2','precio','moneda','precio_usd','precio_m2_usd','distancia_anelo_km','servicios','escritura','vendedor','url','industrial_relevante','duplicado_de','coord_estimada','lat','lon'];
+  const esc = v => {
+    if (v == null) return '';
+    const s = Array.isArray(v) ? v.join('; ') : String(v);
+    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  };
+  const rows = [cols.join(',')];
+  for (const r of filtered) rows.push(cols.map(c => esc(r[c])).join(','));
+  const blob = new Blob(['\ufeff' + rows.join('\n')], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `terrenos_vaca_muerta_${META.fecha_scrape || new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+});
+
+render();
+</script>
+</body>
+</html>
