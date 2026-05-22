@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Visor Terrenos · Vaca Muerta</title>
+<title>Visor Terrenos · Inteligencia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -55,6 +55,24 @@
   .brand .dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #6366f1, #8b5cf6); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; box-shadow: 0 2px 8px rgba(99,102,241,0.3); }
   .brand h1 { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
   .brand .sub { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
+
+  .zone-toggle {
+    display: flex; gap: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .zone-toggle button {
+    flex: 1;
+    background: white; border: none; padding: 8px 10px;
+    font-size: 11px; cursor: pointer; font-family: inherit;
+    color: var(--text-soft); font-weight: 500;
+    transition: all 0.15s;
+  }
+  .zone-toggle button:not(:last-child) { border-right: 1px solid var(--border-strong); }
+  .zone-toggle button.active { background: var(--text); color: white; }
+  .zone-toggle button:hover:not(.active) { background: #f1f5f9; }
 
   aside h3 {
     font-size: 10px;
@@ -359,17 +377,158 @@
     to { opacity: 1; transform: translateY(0); }
   }
   tbody tr { animation: fadeIn 0.25s ease-out; }
+
+  /* ============ UPDATES (changelog del scraping) ============ */
+  header.topbar #updates-btn {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: inherit;
+    display: flex; align-items: center; gap: 6px;
+    transition: all 0.15s;
+    margin-right: 8px;
+  }
+  header.topbar #updates-btn:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.3); }
+  header.topbar #updates-btn .badge {
+    background: #f59e0b;
+    color: #0f172a;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 999px;
+    line-height: 1.4;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  #updates-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(15,23,42,0.55);
+    backdrop-filter: blur(3px);
+    z-index: 2000;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 24px;
+    overflow-y: auto;
+  }
+  #updates-backdrop.open { display: flex; }
+  #updates-panel {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 860px;
+    padding: 0;
+    overflow: hidden;
+    animation: fadeIn 0.18s ease-out;
+  }
+  #updates-panel .up-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+  }
+  #updates-panel .up-head h2 {
+    font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--text);
+  }
+  #updates-panel .up-head .up-sub {
+    font-size: 11px; color: var(--text-muted); margin-top: 2px;
+  }
+  #updates-panel .up-close {
+    background: transparent; border: none; cursor: pointer;
+    font-size: 20px; color: var(--text-muted); padding: 4px 10px; border-radius: 6px;
+    transition: all 0.12s;
+  }
+  #updates-panel .up-close:hover { background: var(--border); color: var(--text); }
+  #updates-panel .up-body { padding: 18px 22px 22px; max-height: 70vh; overflow-y: auto; }
+  #updates-panel .up-entry {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  #updates-panel .up-entry:last-child { margin-bottom: 0; }
+  #updates-panel .up-entry-head {
+    padding: 10px 14px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    flex-wrap: wrap;
+  }
+  #updates-panel .up-date { font-weight: 600; font-size: 13px; color: var(--text); font-family: 'JetBrains Mono', monospace; }
+  #updates-panel .up-base { font-size: 11px; color: var(--text-muted); }
+  #updates-panel .up-tally {
+    display: flex; gap: 10px; font-size: 11px; color: var(--text-soft); font-variant-numeric: tabular-nums;
+  }
+  #updates-panel .up-tally .t-add { color: #059669; font-weight: 600; }
+  #updates-panel .up-tally .t-drop { color: #dc2626; font-weight: 600; }
+  #updates-panel .up-note {
+    padding: 8px 14px; font-size: 11px; color: var(--text-soft); background: #fffbeb; border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  #updates-panel table.up-table {
+    width: 100%; border-collapse: collapse; font-size: 11px;
+  }
+  #updates-panel table.up-table thead th {
+    position: static; text-transform: none; letter-spacing: 0; font-size: 10px;
+    background: #ffffff; padding: 7px 10px; color: var(--text-muted); cursor: default;
+    font-weight: 600;
+  }
+  #updates-panel table.up-table tbody td {
+    padding: 6px 10px; border-top: 1px solid #f1f5f9; color: var(--text-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  #updates-panel table.up-table tbody td.src { color: var(--text); font-weight: 500; }
+  #updates-panel table.up-table tbody td.ch-add { color: #059669; font-weight: 600; text-align: right; }
+  #updates-panel table.up-table tbody td.ch-drop { color: #dc2626; font-weight: 600; text-align: right; }
+  #updates-panel table.up-table tbody td.ch-zero { color: var(--text-muted); text-align: right; }
+  #updates-panel table.up-table tbody td.ch-num { text-align: right; }
+  #updates-panel table.up-table tbody td.ch-warn { color: #d97706; font-style: italic; }
+  #updates-panel .up-diff { padding: 10px 14px 14px; }
+  #updates-panel .up-diff h4 {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); font-weight: 600; margin: 8px 0 6px;
+  }
+  #updates-panel .up-diff .diff-list {
+    display: flex; flex-direction: column; gap: 3px; font-size: 11px;
+  }
+  #updates-panel .up-diff .diff-item {
+    display: flex; gap: 8px; align-items: baseline;
+    padding: 3px 6px; border-radius: 4px;
+  }
+  #updates-panel .up-diff .diff-item .tag {
+    font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 3px; flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: 0.03em;
+  }
+  #updates-panel .up-diff .diff-item.add .tag { background: #d1fae5; color: #065f46; }
+  #updates-panel .up-diff .diff-item.drop .tag { background: #fee2e2; color: #991b1b; }
+  #updates-panel .up-diff .diff-item a { color: var(--accent); text-decoration: none; word-break: break-all; }
+  #updates-panel .up-diff .diff-item a:hover { text-decoration: underline; }
+  #updates-panel .up-diff .diff-src { color: var(--text-muted); font-size: 10px; margin-left: 4px; }
+  #updates-panel .up-empty {
+    padding: 24px; text-align: center; color: var(--text-muted); font-size: 12px;
+  }
 </style>
 </head>
 <body>
 <div class="app">
   <aside>
-    <div class="brand">
-      <div class="dot">V</div>
+    <div class="brand" id="brand">
+      <div class="dot" id="brand-dot">V</div>
       <div>
-        <h1>Vaca Muerta</h1>
-        <div class="sub">Terrenos / Inteligencia</div>
+        <h1 id="brand-title">Vaca Muerta</h1>
+        <div class="sub" id="brand-sub">Terrenos / Inteligencia</div>
       </div>
+    </div>
+
+    <div class="zone-toggle" id="zone-toggle">
+      <button data-zona="vaca_muerta" class="active">Vaca Muerta</button>
+      <button data-zona="zarate">Zárate</button>
     </div>
 
     <div class="group">
@@ -436,7 +595,7 @@
   <main>
     <header class="topbar">
       <div class="title">
-        <h1>Inteligencia de Terrenos · Vaca Muerta</h1>
+        <h1 id="header-title">Inteligencia de Terrenos · Vaca Muerta</h1>
         <div class="meta" id="meta"></div>
       </div>
       <div class="stats">
@@ -445,9 +604,25 @@
         <div><strong id="s-min">—</strong><span>USD/m² mín</span></div>
         <div><strong id="s-max">—</strong><span>USD/m² máx</span></div>
         <div><strong id="s-sup">—</strong><span>m² total</span></div>
-        <div><button id="export-csv">⬇ Exportar CSV</button></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button id="updates-btn" title="Cambios detectados en el último chequeo del scraping">🔔 Cambios <span class="badge" id="updates-badge">0</span></button>
+          <button id="export-csv">⬇ Exportar CSV</button>
+        </div>
       </div>
     </header>
+
+    <div id="updates-backdrop" role="dialog" aria-modal="true" aria-labelledby="updates-title">
+      <div id="updates-panel">
+        <div class="up-head">
+          <div>
+            <h2 id="updates-title">Actualizaciones del scraping</h2>
+            <div class="up-sub">Diferencias detectadas entre corridas de la tarea programada <span class="mono">daily-scraping</span>. Registro cronológico.</div>
+          </div>
+          <button class="up-close" id="updates-close" aria-label="Cerrar">×</button>
+        </div>
+        <div class="up-body" id="updates-body"></div>
+      </div>
+    </div>
 
     <div class="pills" id="pills">
       <span class="pills-label">Presets</span>
@@ -457,10 +632,10 @@
       <span class="pill" data-preset="pi-anelo">◆ Parque Industrial Añelo</span>
       <span class="pill" data-preset="baratos">$ USD/m² &lt; 50</span>
       <span class="pill" data-preset="hectareas">◈ &gt;1 hectárea</span>
-      <div class="map-toggle">
-        <button id="map-light" class="active">Claro</button>
-        <button id="map-dark">Oscuro</button>
-      </div>
+    </div>
+    <div class="map-toggle">
+      <button id="map-light" class="active">Claro</button>
+      <button id="map-dark">Oscuro</button>
     </div>
 
     <div class="split">
@@ -475,7 +650,7 @@
             <th data-sort="superficie_m2" class="num">Sup m²</th>
             <th data-sort="precio_usd" class="num">USD</th>
             <th data-sort="precio_m2_usd" class="num">USD/m²</th>
-            <th data-sort="distancia_anelo_km" class="num">km a Añelo</th>
+            <th data-sort="distancia_ref_km" class="num" id="th-dist">km a Añelo</th>
             <th data-sort="servicios">Servicios</th>
             <th data-sort="vendedor">Vendedor</th>
             <th>Link</th>
@@ -489,15 +664,49 @@
 </div>
 
 <script src="listings.js"></script>
+<script src="updates.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
-const zonColors = {
+var zonColors = {
   industrial: '#dc2626', mixta: '#ea580c', comercial: '#9333ea',
   residencial: '#2563eb', rural: '#059669', null: '#64748b', undefined: '#64748b'
 };
 
-const L_data = window.LISTINGS || [];
-const META = window.METADATA || {};
+var L_data = window.LISTINGS || [];
+var META = window.METADATA || {};
+
+var ZONE_UI = {
+  vaca_muerta: {
+    dot: 'VM', title: 'Vaca Muerta', subtitle: 'Terrenos — Inteligencia',
+    headerTitle: 'Terrenos Vaca Muerta', csvPrefix: 'terrenos_vaca_muerta',
+    presets: [
+      { id: 'industrial', label: 'Industriales' },
+      { id: 'grandes', label: '>5.000 m²' },
+      { id: 'nodo', label: 'Nodo Las Cortaderas' },
+      { id: 'pi-anelo', label: 'PI Añelo' },
+      { id: 'baratos', label: 'USD/m²<50' },
+      { id: 'hectareas', label: '>1 ha' }
+    ]
+  },
+  zarate: {
+    dot: 'ZA', title: 'Zárate', subtitle: 'Terrenos — Inteligencia',
+    headerTitle: 'Terrenos Zárate · Campana · Lima', csvPrefix: 'terrenos_zarate',
+    presets: [
+      { id: 'industrial', label: 'Industriales' },
+      { id: 'grandes', label: '>5.000 m²' },
+      { id: 'polo-zarate', label: 'Polo Ind. Zárate' },
+      { id: 'ruta9', label: 'Zona Ruta 9' },
+      { id: 'baratos', label: 'USD/m²<50' },
+      { id: 'hectareas', label: '>1 ha' }
+    ]
+  }
+};
+
+var currentZona = 'vaca_muerta';
+
+function getZoneMeta() { return (META.zones || {})[currentZona] || {}; }
+function getZoneUI() { return ZONE_UI[currentZona] || ZONE_UI.vaca_muerta; }
+function getZoneListings() { return L_data.filter(r => r.zona === currentZona); }
 
 document.getElementById('meta').textContent =
   `TC blue ${META.tc_usd_blue_venta} · ${META.fuente_tc} · scrape ${META.fecha_scrape} · ${L_data.length} listings consolidados`;
@@ -521,9 +730,17 @@ function makeCheckboxes(containerId, values, name) {
   }
 }
 
-makeCheckboxes('f-localidad', uniqueCounts(L_data, 'localidad'), 'localidad');
-makeCheckboxes('f-zonificacion', uniqueCounts(L_data, 'zonificacion'), 'zonificacion');
-makeCheckboxes('f-portal', uniqueCounts(L_data, 'portal'), 'portal');
+function rebuildFilters() {
+  const zl = getZoneListings();
+  makeCheckboxes('f-localidad', uniqueCounts(zl, 'localidad'), 'localidad');
+  makeCheckboxes('f-zonificacion', uniqueCounts(zl, 'zonificacion'), 'zonificacion');
+  makeCheckboxes('f-portal', uniqueCounts(zl, 'portal'), 'portal');
+  document.querySelectorAll('#f-localidad input, #f-zonificacion input, #f-portal input').forEach(el => {
+    el.addEventListener('change', render);
+  });
+}
+
+rebuildFilters();
 
 const serviciosCatalog = ['luz','electricidad','agua','gas','cloacas','cloaca','asfalto','internet','seguridad','alumbrado público'];
 const serviciosEl = document.getElementById('f-servicios');
@@ -533,13 +750,13 @@ for (const s of serviciosCatalog) {
 }
 
 // ============ MAP ============
-const map = L.map('map', { zoomControl: true, attributionControl: true }).setView([-38.6, -68.5], 8);
+var map = L.map('map', { zoomControl: true, attributionControl: true }).setView([-38.6, -68.5], 8);
 
-const tileLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+var tileLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
   subdomains: 'abcd', maxZoom: 19
 });
-const tileDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+var tileDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
   subdomains: 'abcd', maxZoom: 19
 });
@@ -563,10 +780,10 @@ legend.onAdd = () => {
 };
 legend.addTo(map);
 
-let markerLayer = L.layerGroup().addTo(map);
-let sortKey = 'precio_m2_usd';
-let sortAsc = true;
-let currentPreset = null;
+var markerLayer = L.layerGroup().addTo(map);
+var sortKey = 'precio_m2_usd';
+var sortAsc = true;
+var currentPreset = null;
 
 function getFilters() {
   const q = document.getElementById('q').value.toLowerCase().trim();
@@ -600,6 +817,14 @@ function applyPreset(rec) {
   if (currentPreset === 'pi-anelo') {
     const t = ((rec.titulo || '') + ' ' + (rec.direccion_o_zona || '')).toLowerCase();
     return rec.localidad === 'Añelo' && (t.includes('parque industrial') || t.includes('ruta 17') || t.includes('ruta 7'));
+  }
+  if (currentPreset === 'polo-zarate') {
+    const t = ((rec.titulo || '') + ' ' + (rec.direccion_o_zona || '') + ' ' + (rec.descripcion || '')).toLowerCase();
+    return t.includes('polo industrial') || t.includes('parque industrial zarate') || t.includes('parque industrial zárate') || t.includes('parque industrial campana');
+  }
+  if (currentPreset === 'ruta9') {
+    const t = ((rec.titulo || '') + ' ' + (rec.direccion_o_zona || '') + ' ' + (rec.descripcion || '')).toLowerCase();
+    return t.includes('ruta 9') || t.includes('autopista') || t.includes('colectora');
   }
   if (currentPreset === 'baratos') return rec.precio_m2_usd != null && rec.precio_m2_usd < 50;
   if (currentPreset === 'hectareas') return rec.superficie_m2 && rec.superficie_m2 >= 10000;
@@ -702,7 +927,7 @@ function renderMap(records) {
       <div class="pop-row"><span>Superficie</span><b class="mono">${fmt(r.superficie_m2)} m²</b></div>
       <div class="pop-row"><span>Precio</span><b class="mono">${r.precio_usd ? 'USD ' + fmt(r.precio_usd) : '—'}</b></div>
       <div class="pop-row"><span>USD/m²</span><b class="mono">${r.precio_m2_usd ? fmt(r.precio_m2_usd, 1) : '—'}</b></div>
-      <div class="pop-row"><span>Distancia Añelo</span><b class="mono">${r.distancia_anelo_km} km</b></div>
+      <div class="pop-row"><span>Dist. ${getZoneMeta().referencia_label || 'ref'}</span><b class="mono">${r.distancia_ref_km} km</b></div>
       <div class="pop-meta">
         Servicios: ${(r.servicios || []).join(', ') || '—'}<br>
         Vendedor: ${r.vendedor || '—'}${r.coord_estimada ? ' · <i>coord. estimada</i>' : ''}
@@ -738,7 +963,7 @@ function renderTable(records) {
       <td class="num">${fmt(r.superficie_m2)}</td>
       <td class="num">${r.precio_usd ? fmt(r.precio_usd) : '—'}</td>
       <td class="num">${r.precio_m2_usd ? fmt(r.precio_m2_usd, 1) : '—'}</td>
-      <td class="num">${r.distancia_anelo_km}</td>
+      <td class="num">${r.distancia_ref_km}</td>
       <td class="servicios">${(r.servicios || []).map(s => `<span>${s}</span>`).join('')}</td>
       <td>${r.vendedor || ''}</td>
       <td><a href="${r.url}" target="_blank" rel="noopener">↗</a></td>`;
@@ -781,7 +1006,7 @@ function updateStats(records) {
 }
 
 function render() {
-  const filtered = filter(L_data);
+  var filtered = filter(getZoneListings());
   renderMap(filtered);
   renderTable(filtered);
   updateStats(filtered);
@@ -807,20 +1032,32 @@ document.querySelectorAll('thead th[data-sort]').forEach(th => {
   });
 });
 
-document.querySelectorAll('.pill').forEach(p => {
-  p.addEventListener('click', () => {
-    const preset = p.dataset.preset;
-    if (currentPreset === preset) {
-      currentPreset = null;
-      p.classList.remove('active');
-    } else {
-      document.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
-      p.classList.add('active');
-      currentPreset = preset;
-    }
-    render();
-  });
-});
+function renderPills() {
+  const container = document.getElementById('pills');
+  if (!container) return;
+  const zu = getZoneUI();
+  container.innerHTML = '';
+  for (const p of zu.presets) {
+    const btn = document.createElement('button');
+    btn.className = 'pill' + (currentPreset === p.id ? ' active' : '');
+    btn.dataset.preset = p.id;
+    btn.textContent = p.label;
+    btn.addEventListener('click', () => {
+      if (currentPreset === p.id) {
+        currentPreset = null;
+        btn.classList.remove('active');
+      } else {
+        container.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        currentPreset = p.id;
+      }
+      render();
+    });
+    container.appendChild(btn);
+  }
+}
+
+renderPills();
 
 document.getElementById('map-light').addEventListener('click', () => {
   map.removeLayer(tileDark); tileLight.addTo(map);
@@ -834,8 +1071,8 @@ document.getElementById('map-dark').addEventListener('click', () => {
 });
 
 document.getElementById('export-csv').addEventListener('click', () => {
-  const filtered = filter(L_data);
-  const cols = ['portal','localidad','titulo','direccion_o_zona','zonificacion','superficie_m2','precio','moneda','precio_usd','precio_m2_usd','distancia_anelo_km','servicios','escritura','vendedor','url','industrial_relevante','duplicado_de','coord_estimada','lat','lon'];
+  const filtered = filter(getZoneListings());
+  const cols = ['portal','localidad','titulo','direccion_o_zona','zonificacion','superficie_m2','precio','moneda','precio_usd','precio_m2_usd','distancia_ref_km','servicios','escritura','vendedor','url','industrial_relevante','duplicado_de','coord_estimada','lat','lon'];
   const esc = v => {
     if (v == null) return '';
     const s = Array.isArray(v) ? v.join('; ') : String(v);
@@ -846,11 +1083,139 @@ document.getElementById('export-csv').addEventListener('click', () => {
   const blob = new Blob(['\ufeff' + rows.join('\n')], { type: 'text/csv;charset=utf-8' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `terrenos_vaca_muerta_${META.fecha_scrape || new Date().toISOString().slice(0,10)}.csv`;
+  a.download = `${getZoneUI().csvPrefix}_${META.fecha_scrape || new Date().toISOString().slice(0,10)}.csv`;
   a.click();
 });
 
 render();
+
+// ============ Updates panel (changelog del scraping) ============
+var _updatesAll = Array.isArray(window.UPDATES) ? window.UPDATES : [];
+var _updBtn = document.getElementById('updates-btn');
+var _updBadge = document.getElementById('updates-badge');
+var _updBackdrop = document.getElementById('updates-backdrop');
+var _updClose = document.getElementById('updates-close');
+var _updBody = document.getElementById('updates-body');
+
+function _escHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function _renderUpdateEntry(u) {
+  const fuentes = Object.entries(u.resumen_por_fuente || {});
+  let totalAdd = 0, totalDrop = 0;
+  for (const [, f] of fuentes) {
+    if (typeof f.agregadas === 'number') totalAdd += f.agregadas;
+    if (typeof f.bajadas === 'number')   totalDrop += f.bajadas;
+  }
+  const filas = fuentes.map(([src, f]) => {
+    const add = typeof f.agregadas === 'number'
+      ? (f.agregadas > 0 ? `<td class="ch-add">+${f.agregadas}</td>` : `<td class="ch-zero">0</td>`)
+      : `<td class="ch-warn">?</td>`;
+    const drop = typeof f.bajadas === 'number'
+      ? (f.bajadas > 0 ? `<td class="ch-drop">−${f.bajadas}</td>` : `<td class="ch-zero">0</td>`)
+      : `<td class="ch-warn">?</td>`;
+    const notaInline = f.nota ? `<div style="font-size:10px;color:#d97706;margin-top:2px;">${_escHtml(f.nota)}</div>` : '';
+    return `<tr>
+      <td class="src">${_escHtml(src)}${notaInline}</td>
+      <td class="ch-num">${f.snapshot ?? '—'}</td>
+      <td class="ch-num">${f.hoy ?? '—'}</td>
+      ${add}
+      ${drop}
+    </tr>`;
+  }).join('');
+  const diffs = (u.cambios || []).map(c => {
+    const cls = c.tipo === 'agregada' ? 'add' : 'drop';
+    const tag = c.tipo === 'agregada' ? 'ADD' : 'DROP';
+    const nota = c.nota ? `<div class="diff-src">${_escHtml(c.nota)}</div>` : '';
+    return `<div class="diff-item ${cls}">
+      <span class="tag">${tag}</span>
+      <div style="flex:1;min-width:0;">
+        <a href="${_escHtml(c.url)}" target="_blank" rel="noopener">${_escHtml(c.url)}</a>
+        <span class="diff-src">${_escHtml(c.fuente)}</span>
+        ${nota}
+      </div>
+    </div>`;
+  }).join('');
+  const notaBlock = u.nota ? `<div class="up-note">📝 ${_escHtml(u.nota)}</div>` : '';
+  return `<div class="up-entry">
+    <div class="up-entry-head">
+      <div>
+        <div class="up-date">${_escHtml(u.fecha)}</div>
+        <div class="up-base">Comparado contra snapshot <span class="mono">${_escHtml(u.snapshot_base)}</span></div>
+      </div>
+      <div class="up-tally">
+        <span class="t-add">+${totalAdd} agregadas</span>
+        <span class="t-drop">−${totalDrop} bajadas</span>
+      </div>
+    </div>
+    ${notaBlock}
+    <table class="up-table">
+      <thead><tr>
+        <th>Fuente</th>
+        <th style="text-align:right;">Snap</th>
+        <th style="text-align:right;">Hoy</th>
+        <th style="text-align:right;">Altas</th>
+        <th style="text-align:right;">Bajas</th>
+      </tr></thead>
+      <tbody>${filas}</tbody>
+    </table>
+    ${diffs ? `<div class="up-diff"><h4>URLs cambiadas</h4><div class="diff-list">${diffs}</div></div>` : ''}
+  </div>`;
+}
+
+function _refreshUpdatesPanel() {
+  const zoneUpdates = _updatesAll.filter(u => u.zona === currentZona);
+  let latestChanges = 0;
+  if (zoneUpdates.length) {
+    for (const f of Object.values(zoneUpdates[0].resumen_por_fuente || {})) {
+      if (typeof f.agregadas === 'number') latestChanges += f.agregadas;
+      if (typeof f.bajadas === 'number')   latestChanges += f.bajadas;
+    }
+  }
+  _updBadge.textContent = latestChanges;
+  _updBadge.style.background = latestChanges ? '' : '#10b981';
+  if (!zoneUpdates.length) {
+    _updBody.innerHTML = '<div class="up-empty">Aún no hay chequeos registrados para esta zona. El próximo run de <span class="mono">daily-scraping</span> agregará una entrada.</div>';
+  } else {
+    _updBody.innerHTML = zoneUpdates.map(_renderUpdateEntry).join('');
+  }
+}
+
+_refreshUpdatesPanel();
+
+_updBtn.addEventListener('click', () => _updBackdrop.classList.add('open'));
+_updClose.addEventListener('click', () => _updBackdrop.classList.remove('open'));
+_updBackdrop.addEventListener('click', e => { if (e.target === _updBackdrop) _updBackdrop.classList.remove('open'); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') _updBackdrop.classList.remove('open'); });
+
+// ============ Zone switching ============
+function switchZone(zonaId) {
+  if (!ZONE_UI[zonaId]) return;
+  currentZona = zonaId;
+  currentPreset = null;
+  const zu = getZoneUI();
+  const zm = getZoneMeta();
+  document.getElementById('brand-dot').textContent = zu.dot;
+  document.getElementById('brand-title').textContent = zu.title;
+  document.getElementById('brand-sub').textContent = zu.subtitle;
+  document.getElementById('header-title').textContent = zu.headerTitle;
+  document.getElementById('th-dist').textContent = 'km a ' + (zm.referencia_label || 'ref');
+  document.querySelectorAll('#zone-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.zona === zonaId);
+  });
+  if (zm.map_center) map.flyTo(zm.map_center, zm.map_zoom || 10, { duration: 0.8 });
+  rebuildFilters();
+  renderPills();
+  _refreshUpdatesPanel();
+  document.querySelectorAll('aside input[type="checkbox"]').forEach(c => { if (c.name === 'servicios' || c.id === 'excl-dup') return; });
+  document.querySelectorAll('aside input[type="search"], aside input[type="number"]').forEach(c => c.value = '');
+  render();
+}
+
+document.querySelectorAll('#zone-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => switchZone(btn.dataset.zona));
+});
 </script>
 </body>
 </html>

@@ -11,6 +11,7 @@
 window.UPDATES = [
   {
     fecha: "2026-04-22",
+    zona: "vaca_muerta",
     snapshot_base: "2026-04-20",
     resumen_por_fuente: {
       "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
