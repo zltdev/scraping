@@ -1204,13 +1204,15 @@ function switchZone(zonaId) {
   document.querySelectorAll('#zone-toggle button').forEach(b => {
     b.classList.toggle('active', b.dataset.zona === zonaId);
   });
-  if (zm.map_center) map.flyTo(zm.map_center, zm.map_zoom || 10, { duration: 0.8 });
   rebuildFilters();
   renderPills();
   _refreshUpdatesPanel();
-  document.querySelectorAll('aside input[type="checkbox"]').forEach(c => { if (c.name === 'servicios' || c.id === 'excl-dup') return; });
   document.querySelectorAll('aside input[type="search"], aside input[type="number"]').forEach(c => c.value = '');
   render();
+  if (zm.map_center) {
+    map.invalidateSize();
+    map.setView(zm.map_center, zm.map_zoom || 10);
+  }
 }
 
 document.querySelectorAll('#zone-toggle button').forEach(btn => {
