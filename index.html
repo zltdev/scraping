@@ -632,10 +632,10 @@
       <span class="pill" data-preset="pi-anelo">◆ Parque Industrial Añelo</span>
       <span class="pill" data-preset="baratos">$ USD/m² &lt; 50</span>
       <span class="pill" data-preset="hectareas">◈ &gt;1 hectárea</span>
-    </div>
-    <div class="map-toggle">
-      <button id="map-light" class="active">Claro</button>
-      <button id="map-dark">Oscuro</button>
+      <div class="map-toggle">
+        <button id="map-light" class="active">Claro</button>
+        <button id="map-dark">Oscuro</button>
+      </div>
     </div>
 
     <div class="split">
@@ -1036,7 +1036,7 @@ function renderPills() {
   const container = document.getElementById('pills');
   if (!container) return;
   const zu = getZoneUI();
-  container.innerHTML = '';
+  container.querySelectorAll('.pill, .pills-label').forEach(el => el.remove());
   for (const p of zu.presets) {
     const btn = document.createElement('button');
     btn.className = 'pill' + (currentPreset === p.id ? ' active' : '');
