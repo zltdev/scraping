@@ -10,6 +10,46 @@
 
 window.UPDATES = [
   {
+    fecha: "2026-05-25",
+    snapshot_base: "2026-05-24",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0 },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Hoy el dominio guionado vaca-muerta-propiedades.com devolvió ECONNREFUSED; vacamuertapropiedades.com.ar respondió y listó los mismos 4 slugs de terreno (pid9, pid67, pid127, pid263)." }
+    },
+    cambios: [],
+    nota: "Gap de 1 día desde 2026-05-24. **Segundo día espejo perfecto consecutivo** — las 11 fuentes activas devolvieron exactamente el mismo set que ayer (0 altas / 0 bajas en todas). 0 URLs rotadas sobre 134 activas. La probabilidad de coincidencia exacta 2 días seguidos por rotación orgánica es prácticamente nula — refuerza la hipótesis de caché del CDN de argenprop sirviendo la misma p1 desde el 23-05 (fin de semana largo del 25 de Mayo + carga editorial débil). vacamuertapropiedades: el dominio guionado que apareció ayer hoy no responde, el .com.ar sigue siendo el canónico operativo. No se regenera listings.js. Si el 26-05 vuelve a ser día espejo (3.º consecutivo), conviene forzar re-scrape de las fuentes más activas (Neuquén, Centenario, Plottier) ignorando caché para descartar congelamiento real de p1 en origen."
+  },
+  {
+    fecha: "2026-05-24",
+    snapshot_base: "2026-05-23",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0 },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "La home ahora responde desde vaca-muerta-propiedades.com (con guiones, sin .ar). Slugs y pids idénticos." }
+    },
+    cambios: [],
+    nota: "Gap de 1 día desde 2026-05-23. **Día espejo perfecto** — las 11 fuentes activas devolvieron exactamente el mismo set que ayer (0 altas / 0 bajas en todas). 0 URLs rotadas sobre 134 activas. No había ocurrido en chequeos diarios previos (rango histórico 4-20 URLs rotadas). Drivers posibles: fin de semana de carga editorial débil (sábado 24-05) y/o caché del CDN de argenprop sirviendo misma p1. vacamuertapropiedades migró a dominio guionado (vaca-muerta-propiedades.com sin .ar) — los pid de los 4 terrenos siguen siendo los mismos. Sin candidatos a alta real. No se regenera listings.js."
+  },
+  {
     fecha: "2026-05-23",
     snapshot_base: "2026-05-22",
     resumen_por_fuente: {
