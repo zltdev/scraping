@@ -10,6 +10,31 @@
 
 window.UPDATES = [
   {
+    fecha: "2026-05-28",
+    snapshot_base: "2026-05-27",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 2, bajadas: 2, nota: "Único cambio del día. Par viejo 1953x sale, par nuevo 1974x entra. Sin p2 en esta fuente." },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "vacamuertapropiedades.com.ar respondió; los 4 slugs de terreno son idénticos al 27-05 (pid9, pid67, pid127, pid263)." }
+    },
+    cambios: [
+      { fuente: "argenprop — Plaza Huincul", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19744743", nota: "ID familia 1974xxxxx — nuevo, posterior a las altas 1972x-1973x del 27-05. Par secuencial con 19744744." },
+      { fuente: "argenprop — Plaza Huincul", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19744744", nota: "ID familia 1974xxxxx — par secuencial con 19744743. Plaza Huincul: toda la oferta es del corredor Gabriel López (Mat. 380)." },
+      { fuente: "argenprop — Plaza Huincul", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19530527", nota: "Estaba en el set base desde el 22-05 (par secuencial 1953x). Sale junto con 19530528." },
+      { fuente: "argenprop — Plaza Huincul", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19530528", nota: "Par secuencial con 19530527. Sin p2 en la fuente → baja real o re-publicación del mismo corredor con los IDs 1974x." }
+    ],
+    nota: "Gap de 1 día desde 2026-05-27. Vuelve la cadencia diaria estable. **Día casi-espejo**: 10 de 11 fuentes activas idénticas al 27-05; único cambio en Plaza Huincul (2+/2−). El par viejo 19530527/19530528 (familia 1953x) sale y entra el par nuevo 19744743/19744744 (familia 1974x). Como Plaza Huincul no tiene p2 (5 publicaciones, todas del corredor Gabriel López Mat. 380) y ambos pares son secuenciales, el patrón más probable es re-publicación del mismo corredor (despublica 2 lotes viejos y republica con IDs nuevos para refrescar la fecha), no churn de paginación. Las 9 altas reales de familia 1972x-1973x detectadas el 27-05 (centenario--19730244, neuquen--19729622, confluencia-urbana--19720356, plottier--19722979, cardales-chico--19733052, zarate 19724323/19724463, smithfield 19724148/19724805) **siguen las 9 en p1 hoy** — confirma que eran publicaciones nuevas reales y pegajosas, no rotación. No se regenera listings.js (las 2 altas son URLs sin detalle de precio/superficie y Plaza Huincul está fuera del foco industrial del proyecto). icasas omitido. Nota técnica: este run también restauró la visibilidad del panel de Updates en el visor — el filtro por zona descartaba las entradas combinadas sin campo `zona` (todas las diarias desde el 22-05), así que el changelog no se veía; ahora las entradas sin `zona` se muestran en ambas zonas."
+  },
+  {
     fecha: "2026-05-25",
     snapshot_base: "2026-05-24",
     resumen_por_fuente: {
