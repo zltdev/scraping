@@ -10,6 +10,31 @@
 
 window.UPDATES = [
   {
+    fecha: "2026-05-29",
+    snapshot_base: "2026-05-28",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 1, bajadas: 1, nota: "Entra 19746183 (familia 1974x, alta real); sale 18183850 (familia 1818x, viejo). p1 llena + p2 → la baja del 1818x es desplazamiento FIFO a p2, no baja real." },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 1, bajadas: 1, nota: "Entra 19752901 (familia 1975x); sale 19547171 (familia 1954x). Sin p2 → continúa la re-publicación del corredor del 28-05 (1953x→1974x; ahora 1954x→1975x)." },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Los 4 slugs de terreno son idénticos al 28-05 (pid9, pid67, pid127, pid263). Hoy la home respondió desde vaca-muerta.propiedades.ar (3.ª variante de dominio); pids sin cambios." }
+    },
+    cambios: [
+      { fuente: "argenprop — Centenario", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-centenario--19746183", nota: "ID familia 1974xxxxx — alta real. Misma generación que el par 1974x que entró en Plaza Huincul el 28-05." },
+      { fuente: "argenprop — Centenario", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-centenario--18183850", nota: "ID familia 1818x (vieja), en el set base desde el 22-05. Con p1 llena (20) + p2, la salida es desplazamiento FIFO a p2 más que baja real." },
+      { fuente: "argenprop — Plaza Huincul", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19752901", nota: "ID familia 1975xxxxx — el más nuevo de la fuente, posterior al par 1974x del 28-05." },
+      { fuente: "argenprop — Plaza Huincul", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19547171", nota: "ID familia 1954x. Era una de las 3 publicaciones 'del medio' que quedaron intactas el 28-05. Sin p2 → cambio real del set, no FIFO. Corredor Gabriel López (Mat. 380)." }
+    ],
+    nota: "Gap de 1 día desde 2026-05-28. **9 de 11 fuentes activas idénticas** al 28-05; dos fuentes con movimiento, ambas 1+/1−. **Centenario:** entra 19746183 (familia 1974x, alta real) y sale 18183850 (familia 1818x, viejo) — como Centenario tiene p1 llena (20) + p2, la baja del 1818x es muy probablemente desplazamiento FIFO a p2 (materializa el FIFO que el 28-05 anticipaba al entrar contenido nuevo), no venta/despublicación. **Plaza Huincul:** entra 19752901 (familia 1975x) y sale 19547171 (familia 1954x) — sin p2 (5 publicaciones, todas del corredor Gabriel López Mat. 380), confirma y continúa la re-publicación del corredor del 28-05 (entonces 1953x→1974x; ahora 1954x→1975x). Verificación de hipótesis del 28-05: el par 1974x (19744743/19744744) sigue en p1 y el par 1953x no volvió → re-publicación confirmada, no yo-yo. Las 9 altas reales de familia 1972x-1973x del 27-05 siguen las 9 en p1 (ninguna cayó por FIFO; la que salió en Centenario es 1818x vieja). vacamuertapropiedades: 4 slugs idénticos; nueva variante de dominio vaca-muerta.propiedades.ar. No se regenera listings.js (las 2 altas son URLs sin detalle de precio/superficie y ni Centenario ni Plaza Huincul están en el foco industrial). icasas omitido."
+  },
+  {
     fecha: "2026-05-28",
     snapshot_base: "2026-05-27",
     resumen_por_fuente: {
