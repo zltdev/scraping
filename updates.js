@@ -10,6 +10,142 @@
 
 window.UPDATES = [
   {
+    fecha: "2026-06-05",
+    snapshot_base: "2026-06-03",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 1, bajadas: 1, nota: "Entra 19799905 (familia 1979x, alta real, primer 1979x del run); sale 18503796 (lote 18503x del 22-05, desplazamiento FIFO a p2 — refuta FIFO por antigüedad ya que 11283723 sigue en p1)." },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 1, bajadas: 1, nota: "Entra 19798515 (familia 1979x, reanuda corredor generacional tras 2 días de pausa, salta de 1976x a 1979x); sale 19622996 (el más viejo del set, familia 1962x). Patrón confirmado: cada alta generacional desplaza el ID más viejo." },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Tercer chequeo consecutivo (sin contar el 04-06 faltante) en dominio canónico vacamuertapropiedades.com.ar. Slugs idénticos (pid9, pid67, pid127, pid263)." }
+    },
+    cambios: [
+      { fuente: "argenprop — San Patricio del Chañar", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-san-patricio-del-chanar--19799905", nota: "ID familia 1979x — primer 1979x del run en esta fuente. Por proximidad con 19798515 (Plaza Huincul, diferencia 1390) sugiere alta sincronizada de la misma agencia/corredor." },
+      { fuente: "argenprop — San Patricio del Chañar", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-san-patricio-del-chanar--18503796", nota: "Uno del lote masivo 18503x (17 IDs secuenciales del 22-05). Desplazamiento FIFO a p2 — refuta FIFO por antigüedad ya que 11283723 (mucho más viejo) sigue en p1." },
+      { fuente: "argenprop — Plaza Huincul", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19798515", nota: "ID familia 1979x — reanuda corredor generacional tras 2 días de pausa (último fue 19766009 familia 1976x del 01-06). Salta de 1976x a 1979x sin pasar por 1977x/1978x. Probable corredor Gabriel López (Mat. 380)." },
+      { fuente: "argenprop — Plaza Huincul", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19622996", nota: "Familia 1962x — era el más viejo del set de 5. Confirma patrón: cada alta generacional desplaza el ID más viejo. Sin p2 → baja real o re-publicación." }
+    ],
+    nota: "Gap de 2 días desde 2026-06-03 — falta corrida del 04-06 (no hay _check_2026-06-04.json en el repo). **Reanuda el corredor generacional con doble alta simultánea en 2 fuentes**: Chañar (19799905) y Plaza Huincul (19798515), ambas familia 1979x con IDs muy cercanos (diferencia 1390) — fuerte señal de alta sincronizada del mismo origen comercial. El salto 1976x→1979x (saltea 1977x y 1978x) es compatible con publicación interna continua durante la pausa observada en p1: el corredor sí publicó pero los IDs solo trascendieron a p1 hoy. Las otras 9 fuentes activas en espejo. vacamuertapropiedades: 3.º chequeo consecutivo en canónico .com.ar. No se regenera listings.js (ninguna alta cae en el foco industrial). Recomendación para 06-06: si entra 1980x+ confirma cadencia natural; si entran 1977x/1978x indica que el corredor 'rellena hacia atrás'; si reincide el gap, revisar cron / healthcheck."
+  },
+  {
+    fecha: "2026-06-03",
+    snapshot_base: "2026-06-02",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0 },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Responde nuevamente desde dominio canónico vacamuertapropiedades.com.ar. Slugs idénticos." }
+    },
+    cambios: [],
+    nota: "Gap de 1 día desde 2026-06-02. **Miércoles 100% espejo** — las 11 fuentes activas en espejo. **Segundo día consecutivo sin avance del corredor generacional** (último alta fue 19766009 familia 1976x del 01-06). Es la primera vez en el run que dos días seguidos quedan completamente sin churn, ni siquiera rotación intra-camada como había ayer en Plottier/Neuquén. El slug valentina-norte-urbana persiste como único 'no neuquen' en Neuquén capital. No se regenera listings.js."
+  },
+  {
+    fecha: "2026-06-02",
+    snapshot_base: "2026-06-01",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 1, bajadas: 1, nota: "Entra 18881538 (slug valentina-norte-urbana, familia 1888x — NO es alta fresca, es re-superficie de aviso latente); sale 19558451 (familia 1955x, más nuevo que el que entra → no FIFO por antigüedad)." },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0 },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 1, bajadas: 1, nota: "Entra 19531735 (familia 1953x); sale 19520560 (familia 1952x). Rotación intra-camada, no alta generacional. Hipótesis FIFO refutada nuevamente: 17780820/17780840 más viejas siguen en p1." },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Vuelve al canónico .com.ar tras rotación a .com del 01-06. Slugs idénticos." }
+    },
+    cambios: [
+      { fuente: "argenprop — Neuquén capital", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-valentina-norte-urbana--18881538", nota: "Slug nuevo (valentina-norte-urbana, barrio no visto antes en p1). ID familia 1888x — significativamente más viejo que el resto. NO es alta fresca, es re-superficie de aviso latente o re-publicación." },
+      { fuente: "argenprop — Neuquén capital", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-neuquen--19558451", nota: "ID familia 1955x, en p1 desde al menos 28-05. Más nuevo que el que entra (1888x) → la salida NO responde a FIFO por antigüedad de ID." },
+      { fuente: "argenprop — Plottier", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-plottier--19531735", nota: "ID familia 1953x — NO es 1976x ni 1977x (predicción del 01-06 incumplida). Rotación intra-camada, no alta generacional." },
+      { fuente: "argenprop — Plottier", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-plottier--19520560", nota: "ID familia 1952x, en p1 desde al menos 28-05. Hipótesis FIFO refutada: 17780820 y 17780840 (las más viejas) siguen en p1." }
+    ],
+    nota: "Gap de 1 día desde 2026-06-01. **Martes con movimiento contenido pero diverso** — cambian 2 fuentes (no 1 como ayer): Neuquén capital (1+/1−) y Plottier (1+/1−). **Plaza Huincul queda espejo** — el 1976x del lunes no tuvo continuación (contradice la sugerencia del 01-06). Naturaleza distinta de los cambios: Neuquén capital trae un slug de barrio no visto antes (valentina-norte-urbana, familia 1888x — listing viejo que resurge); Plottier muestra swap mínimo intra-familia 195x. Primer día sin avance del corredor generacional desde que arrancó (no entra 1976x ni 1977x)."
+  },
+  {
+    fecha: "2026-06-01",
+    snapshot_base: "2026-05-31",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 1, bajadas: 1, nota: "Entra 19766009 (PRIMER ID familia 1976x del run, salto generacional); sale 19564494 (familia 1956x, en p1 desde al menos 28-05). Cambio generacional 1975x→1976x." },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Hoy responde desde dominio .com (sin .ar) — rotación esporádica de dominio. Slugs idénticos." }
+    },
+    cambios: [
+      { fuente: "argenprop — Plaza Huincul", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19766009", nota: "ID familia 1976x — PRIMER 1976x detectado en todo el run. Salto generacional desde el corredor 1975x (19752901 del 29-05 + 19755626 del 30-05). Probable corredor Gabriel López (Mat. 380)." },
+      { fuente: "argenprop — Plaza Huincul", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-plaza-huincul--19564494", nota: "ID familia 1956x, en p1 desde al menos 28-05. Sin p2 en la fuente → baja real o re-publicación con ID nuevo. El set de Plaza Huincul rota a medida que entran IDs generacionales nuevos." }
+    ],
+    nota: "Gap de 1 día desde 2026-05-31. **El lunes trajo movimiento**. Se rompe el doble espejo 30/31-05 con un único cambio real en Plaza Huincul: entra el primer 1976x del run (19766009), sale 19564494 (familia 1956x). Las otras 10 fuentes activas en espejo. La hipótesis del 31-05 ('lunes suele venir con altas frescas') confirma con creces. No se regenera listings.js. vacamuertapropiedades: hoy responde desde dominio .com (rotación esporádica del patrón observado los días laborables)."
+  },
+  {
+    fecha: "2026-05-31",
+    snapshot_base: "2026-05-30",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0 },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Dominio canónico .com.ar, slugs idénticos." }
+    },
+    cambios: [],
+    nota: "Gap de 1 día desde 2026-05-30. **Día 100% espejo** — las 11 fuentes activas devolvieron exactamente el mismo set que ayer. 0 altas, 0 bajas en todo el panel. Es el primer espejo total del run desde el doble espejo 24/25-05 (que se rompió el 27-05 con 9 cambios). Las tres fuentes que venían moviendo días previos (Plottier 30-05, Centenario y Plaza Huincul 29-05) hoy quedan todas quietas. Fin de semana de carga editorial débil."
+  },
+  {
+    fecha: "2026-05-30",
+    snapshot_base: "2026-05-29",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0 },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 1, bajadas: 1, nota: "Entra 19755626 (familia 1975x, alta nueva — 3er ID 1975x detectado en 3 días); sale 19531735 (familia 1953x, había entrado el 27-05). Desplazamiento FIFO a p2 — Plottier tiene p2." },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Vuelve al dominio canónico vacamuertapropiedades.com.ar (tras .ar del 29-05). Slugs idénticos." }
+    },
+    cambios: [
+      { fuente: "argenprop — Plottier", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-plottier--19755626", nota: "ID familia 1975x — alta nueva. Tercer ID de la generación 1975x detectado en 3 días distintos (Plaza Huincul 19752901 el 29-05, ahora Plottier)." },
+      { fuente: "argenprop — Plottier", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-plottier--19531735", nota: "ID familia 1953x — había aparecido el 27-05. Plottier tiene p2; desplazamiento FIFO a p2 (no necesariamente baja real). El ordenamiento es por fecha de re-publicación: 19531735 sin renovación reciente cae, mientras 17780820/17780840 (IDs más bajos) siguen en p1 porque fueron bumpeados." }
+    ],
+    nota: "Gap de 1 día desde 2026-05-29. **Día con un único cambio real**: 10 de 11 fuentes activas en espejo. Único movimiento en Plottier (1+/1−): entra 19755626 (familia 1975x) y sale 19531735 (familia 1953x del 27-05). Centenario y Plaza Huincul, que ayer movieron, hoy quedan espejo. Las 9 altas reales 1972x-1973x del 27-05 siguen las 9 en p1. No se regenera listings.js."
+  },
+  {
     fecha: "2026-05-29",
     snapshot_base: "2026-05-28",
     resumen_por_fuente: {
