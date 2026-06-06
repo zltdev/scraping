@@ -10,6 +10,31 @@
 
 window.UPDATES = [
   {
+    fecha: "2026-06-06",
+    snapshot_base: "2026-06-05",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0, nota: "Espejo tras el double-up del 05-06 (19798515). El corredor pausa un día después del descargue." },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 1, bajadas: 1, nota: "Entra 19311911 (familia 1931x, REAPARICIÓN — había estado en p1 del 22-05 al 25-05, vuelve tras 9 días afuera); sale 19531735 (familia 1953x, ID oscilante que ya había salido 30-05/01-06 y vuelto 02-06)." },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 1, bajadas: 1, nota: "Entra 19812510 (slug NUEVO 'las-calandrias', familia 1981x — PRIMER 1981x DEL RUN, supera al 1979x del 05-06); sale 15608517 (countries-y-barrios-cerrados-en-campana, familia 1560x, constante desde el 23-05). Acá SÍ se cumple FIFO por antigüedad." },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Cuarto chequeo consecutivo en dominio canónico vacamuertapropiedades.com.ar (sin contar gap 04-06). Slugs idénticos (pid9, pid67, pid127, pid263)." }
+    },
+    cambios: [
+      { fuente: "argenprop — Plottier", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-plottier--19311911", nota: "REAPARICIÓN — no es alta nueva. Estuvo en p1 del 22-05 al 25-05, cayó el 27-05 y volvió hoy tras 9 días afuera. Familia 1931x, más viejo que el 1953x que sale. Patrón de ranking dinámico (no FIFO) — refuta lectura naïve 'alta = nueva publicación'." },
+      { fuente: "argenprop — Plottier", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-plottier--19531735", nota: "ID oscilante: 22-05 a 29-05 en p1 (8 días), fuera 30-05/01-06, vuelve 02-06 a 05-06, cae hoy. Probable rotación P1↔P2 por ranking, no baja real." },
+      { fuente: "argenprop — Campana", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-las-calandrias--19812510", nota: "ALTA REAL — primer 1981x del run, slug 'las-calandrias' NUEVO en Campana (barrio cerrado del partido). Supera al 1979x del 05-06 por ~13k IDs. La cadencia generacional avanza en Campana mientras Plaza Huincul/Chañar quedan quietas." },
+      { fuente: "argenprop — Campana", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-countries-y-barrios-cerrados-en-campana--15608517", nota: "Familia 1560x — constante desde el 23-05 (14 días). Acá SÍ se cumple FIFO por antigüedad (el 18619706 que queda en p1 del mismo slug es más nuevo). Comportamiento OPUESTO al de Chañar (donde 11283723 viejo persiste y sale 18503796 más nuevo). Regla de ranking inconsistente entre fuentes." }
+    ],
+    nota: "Cadencia diaria recuperada (sin gap respecto del 05-06). **El movimiento se traslada de Vaca Muerta a Campana**: tras el double-up de ayer en Plaza Huincul+Chañar (familia 1979x), hoy esas dos fuentes están en espejo y la frontera generacional avanza a 1981x en Campana (slug nuevo 'las-calandrias'). 9 fuentes en espejo. **Nuevo patrón identificado en Plottier**: re-emergencia de IDs (19311911 vuelve tras 9 días afuera) — refuta la lectura naïve de 'alta = nueva publicación'/'bajada = aviso vendido': una proporción de los movimientos diarios son rotaciones P2↔P1 por ranking dinámico, no churn real. **FIFO por antigüedad inconsistente entre fuentes** (sí en Campana hoy, no en Chañar 05-06). vacamuertapropiedades: 4.º chequeo consecutivo en canónico .com.ar, sin cambios de slugs. No se regenera listings.js (ninguna alta cae en foco industrial: 19812510 es Las Calandrias, country residencial). Recomendación para 07-06: (1) si Plaza Huincul/Chañar siguen quietas, confirmar pausa del corredor tras el descargue; (2) si 19311911 vuelve a salir de Plottier, confirma oscilación pura; (3) si Campana suma otro 1981x o slug las-calandrias agrega IDs, lectura 'ola de altas en Campana'."
+  },
+  {
     fecha: "2026-06-05",
     snapshot_base: "2026-06-03",
     resumen_por_fuente: {
