@@ -10,6 +10,29 @@
 
 window.UPDATES = [
   {
+    fecha: "2026-06-07",
+    snapshot_base: "2026-06-06",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "Segundo día consecutivo en espejo tras el double-up del 05-06 (familia 1979x). El corredor de Vaca Muerta sigue pausado." },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0, nota: "Segundo día consecutivo en espejo tras el 19798515 del 05-06. El corredor pausa, consistente con patrón en ráfagas." },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 1, bajadas: 1, nota: "Entra 8214482 (familia 8214x, ID de 7 dígitos — JAMÁS visto en el run, alta REAL de aviso histórico, distinto de la reaparición del 19311911 del 06-06); sale 19755626 (familia 1975x, llevaba 8 chequeos consecutivos en p1 desde el 30-05, era el ID generacional más reciente de Plottier)." },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0 },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "Espejo tras el 1981x del 06-06. Las Calandrias no suma segundo ID — el 19812510 fue alta puntual, no inicio de serie." },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Quinto chequeo consecutivo en dominio canónico vacamuertapropiedades.com.ar (sin contar gap 04-06). Slugs idénticos (pid9, pid67, pid127, pid263)." }
+    },
+    cambios: [
+      { fuente: "argenprop — Plottier", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-plottier--8214482", nota: "ALTA REAL pero ATÍPICA: ID de 7 dígitos (familia 8214x) JAMÁS visto en ningún snapshot previo del run (verificado con grep). NO es reaparición (no estuvo nunca). Mismo rango de antigüedad que 8214464 (Centenario, estable todo el run) y 9068551 (Rincón, estable). Hipótesis: re-publicación / re-pinning de un aviso latente histórico, o salto de ranking por refresh de la ficha. Tercer régimen de 'alta en diff' distinto: (1) publicación nueva, (2) reaparición reciente como 19311911, (3) re-superficie de aviso histórico como este." },
+      { fuente: "argenprop — Plottier", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-plottier--19755626", nota: "Familia 1975x — 8 chequeos consecutivos en p1 (30-05 a 06-06). Era el ID generacional más reciente de Plottier hasta ayer. Por el patrón observado en otros IDs de Plottier (19531735, 19311911 oscilan entre p1/p2) lo más probable es rotación P1↔P2 por ranking, no baja real. Vigilar si reaparece." }
+    ],
+    nota: "Cadencia diaria preservada. **Movimiento mínimo: 1 sola fuente (Plottier 1+/1-), 10 fuentes en espejo absoluto.** Hipótesis del 06-06 verificadas: (1) Plaza Huincul/Chañar siguen en espejo — pausa del corredor de Vaca Muerta confirmada, el double-up del 05-06 fue puntual; (2) 19311911 PERSISTE en Plottier — su oscilación es más lenta que la de 19531735, refutando un único régimen de ranking; (3) Campana en espejo — el 1981x del 06-06 también fue alta puntual, las dos fuentes del corredor generacional reciente están pausadas. **Nuevo patrón identificado**: alta de 8214482 (Plottier) es un ID de 7 dígitos jamás visto, un tercer régimen de 'alta' (re-superficie de aviso histórico) distinto de las publicaciones nuevas y las reapariciones recientes. Refuerza la inconsistencia entre fuentes y la inadecuación de la lectura naïve del diff. **Frontera generacional del run estable en 1981x** (último avance: Campana 06-06). Patrón en ráfagas confirmado: el corredor avanza 1-4 días seguidos y luego pausa 1-3. vacamuertapropiedades: 5.º chequeo consecutivo en canónico .com.ar. No se regenera listings.js (8214482 fuera del foco industrial). Sugerencias para 08-06: (1) si Plottier vuelve a sumar otro ID 7-dígitos, lectura 'ronda de re-superficies'; (2) si el corredor retoma con 1981x+ en Vaca Muerta o Campana, ráfaga 3; (3) si 8214482 desaparece rápido confirma 'alta puntual', si persiste varios chequeos confirma 'clase 7-dígitos rota lento'."
+  },
+  {
     fecha: "2026-06-06",
     snapshot_base: "2026-06-05",
     resumen_por_fuente: {
