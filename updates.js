@@ -10,6 +10,29 @@
 
 window.UPDATES = [
   {
+    fecha: "2026-06-09",
+    snapshot_base: "2026-06-07",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "Tercer día consecutivo en espejo tras el double-up del 05-06 (familia 1979x). El corredor generacional sigue pausado." },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0 },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0, nota: "Tercer día consecutivo en espejo tras el 19798515 del 05-06. Pausa más larga del corredor desde su arranque." },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "8214482 PERSISTE (2.º chequeo consecutivo) — refuta 'alta puntual' del 07-06, confirma 'clase histórica rota lento' alineado con 8214464 (Centenario) y 9068551 (Rincón)." },
+      "argenprop — Rincón de los Sauces":          { snapshot: 4,  hoy: 6,  agregadas: 2, bajadas: 0, nota: "Rincón ROMPE su techo histórico de 4 publicaciones por primera vez en el run — salta a 6. Doble alta histórica: entran 15827220 (familia 1582x) y 16238703 (familia 1623x), ambos IDs viejos de 8 dígitos jamás vistos. Amplifica el patrón 'alta histórica' inaugurado por 8214482 (Plottier 07-06)." },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "Tercer día consecutivo en espejo tras el 1981x del 06-06. Las Calandrias sin segundo ID. Frontera generacional estable." },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Sexto chequeo consecutivo en dominio canónico vacamuertapropiedades.com.ar (sin contar gaps 04-06 y 08-06). Slugs idénticos (pid9, pid67, pid127, pid263)." }
+    },
+    cambios: [
+      { fuente: "argenprop — Rincón de los Sauces", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-rincon-de-los-sauces--15827220", nota: "ALTA HISTÓRICA — JAMÁS visto en ningún snapshot previo del run (verificado contra todos los _check_*.json desde abril). ID de 8 dígitos pero familia 1582x (generación 2017-2019). Régimen 'alta histórica' alineado con 8214482 (Plottier 07-06), 8214464 (Centenario, todo el run), 9068551 (Rincón, todo el run). Rincón rompe su techo histórico de 4 publicaciones por primera vez en el run." },
+      { fuente: "argenprop — Rincón de los Sauces", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-rincon-de-los-sauces--16238703", nota: "ALTA HISTÓRICA — JAMÁS visto antes en el run. Familia 1623x, también ID viejo de 8 dígitos. Doble re-superficie simultánea en Rincón: dos avisos antiguos emergen a p1 a la vez. Refuerza que el patrón 'alta histórica' no es idiosincrático de Plottier sino un proceso multi-fuente del motor de ranking de argenprop sobre IDs antiguos." }
+    ],
+    nota: "Gap de 1 día (no hubo corrida 08-06). **Único movimiento: Rincón 2+/0− (4 → 6 URLs)** — Rincón rompe por PRIMERA VEZ en el run su techo histórico de 4 publicaciones, sumando dos altas históricas simultáneas (familias 1582x y 1623x). 10 fuentes en espejo absoluto. **Confirmación hipótesis 07-06**: (a) Plottier 8214482 PERSISTE 2.º chequeo consecutivo — refuta 'alta puntual', confirma 'clase histórica rota lento'; (b) el patrón 'alta de aviso histórico' se amplifica de Plottier a Rincón, dejando de ser idiosincrático para volverse multi-fuente; (c) refinamiento del modelo — no es solo 7 dígitos, también 8 dígitos de generación 2017-2019 (familias 1582x, 1623x, 1888x); el criterio real es ANTIGÜEDAD DEL AVISO, no longitud del ID. **Corredor generacional pausa por 3.º día consecutivo** — la pausa más larga del run desde su arranque a fines de mayo (tras 1981x del 06-06: espejo 06-07, gap 06-08, espejo 09-06). Si el patrón 'ráfagas cortas + pausas largas' se confirma, el próximo avance debería ser doble. vacamuertapropiedades: 6.º chequeo consecutivo en canónico .com.ar. No se regenera listings.js (Rincón fuera del foco industrial; las altas son URLs sin precio/superficie). Sugerencias para 10-06: (1) si otra fuente (Centenario/Neuquén/Campana) suma su primera alta histórica, confirma 'ronda multi-fuente'; (2) si el corredor retoma con 1981x+, ráfaga 3 esperada (posible avance doble compensando pausa larga); (3) si 15827220/16238703 desaparecen rápido, alta puntual (Rincón vuelve a 4); si persisten, cambio estructural (Rincón pasa a tener set estable de 6)."
+  },
+  {
     fecha: "2026-06-07",
     snapshot_base: "2026-06-06",
     resumen_por_fuente: {
