@@ -10,6 +10,35 @@
 
 window.UPDATES = [
   {
+    fecha: "2026-06-13",
+    snapshot_base: "2026-06-12",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0, nota: "19833452 (1983x) PERSISTE 3.º chequeo consecutivo — frontera generacional 1983x del run fijada con holgura." },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0 },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "12060433 (1206x) PERSISTE 2.º chequeo — alta histórica consolidada. 8214482 PERSISTE 5.º chequeo consecutivo — clase histórica rota lento confirmadísima. 19755626 NO vuelve (5.º chequeo afuera) — salida definitiva." },
+      "argenprop — Rincón de los Sauces":          { snapshot: 6,  hoy: 6,  agregadas: 0, bajadas: 0, nota: "Set idéntico 3.º chequeo post-salto — cambio estructural DEFINITIVAMENTE confirmado. 15827220 + 16238703 ya son parte del catálogo permanente." },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 4, bajadas: 4, nota: "ÚNICA FUENTE CON MOVIMIENTO HOY. Rompe espejo absoluto del 12-06. Bajan en bloque los 4 IDs familia 1592x (15925529/48/54/71) — primera BAJA MASIVA de una misma familia del run, atípica vs FIFO habitual. Entran 4 fichas todas en zona Los Cardales/countries: 15608517 REAPARECE tras 7 días afuera (paralelo a 19311911/Plottier 9 días), 19782477 (slug NUEVO 'barrio-el-campo-fincas-exclusivas-cardales', familia 1978x — no rompe frontier local 1981x), 18526091 (slug NUEVO 'cardales-village'), 18045092 (2.º lote de slug ya activo 'la-reserva-cardales'). Re-balanceo geográfico de p1: sale Campana centro, entra cinturón residencial." },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Noveno chequeo consecutivo en dominio canónico vacamuertapropiedades.com.ar (sin contar gaps 04-06, 08-06, 10-06). Slugs idénticos (pid9, pid67, pid127, pid263)." }
+    },
+    cambios: [
+      { fuente: "argenprop — Campana", tipo: "bajada", url: "https://www.argenprop.com/terreno-en-venta-en-campana--15925529", nota: "Bloque 1592x — cae junto a los otros 3 IDs familia 1592x. Primera baja masiva coordinada del run. Hipótesis: re-rank temporal vs despublicación del vendedor vs downgrade. Vigilar 14-06." },
+      { fuente: "argenprop — Campana", tipo: "bajada", url: "https://www.argenprop.com/terreno-en-venta-en-campana--15925548", nota: "Bloque 1592x — sale en bloque." },
+      { fuente: "argenprop — Campana", tipo: "bajada", url: "https://www.argenprop.com/terreno-en-venta-en-campana--15925554", nota: "Bloque 1592x — sale en bloque." },
+      { fuente: "argenprop — Campana", tipo: "bajada", url: "https://www.argenprop.com/terreno-en-venta-en-campana--15925571", nota: "Bloque 1592x — sale en bloque." },
+      { fuente: "argenprop — Campana", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-countries-y-barrios-cerrados-en-campana--15608517", nota: "REAPARICIÓN — la familia 1560x estuvo en p1 hasta 06-06 (cayó ese día por FIFO con la entrada del 1981x), vuelve tras 7 días afuera. Cadencia muy similar al 19311911/Plottier (9 días), confirma que la categoría 're-emergencia de ID reciente' opera con ciclo ~1 semana, distinta de la 'alta histórica' (que persiste sin re-bajas)." },
+      { fuente: "argenprop — Campana", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-la-reserva-cardales--18045092", nota: "Segundo lote del slug 'la-reserva-cardales' (el 15749463 ya estaba en p1). Familia 1804x — antigüedad media, jamás vista antes en p1 del run." },
+      { fuente: "argenprop — Campana", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-barrio-el-campo-fincas-exclusivas-cardales--19782477", nota: "SLUG NUEVO en Campana — jamás visto en el run. Familia 1978x — cercana al frontier local 1981x pero NO lo supera (19812510/Las Calandrias sigue como techo de Campana). Entra DEBAJO del frontier ya establecido = 'relleno', no avance." },
+      { fuente: "argenprop — Campana", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-cardales-village--18526091", nota: "SLUG NUEVO en Campana — jamás visto. Familia 1852x — antigüedad media. Tercer slug nuevo del run en Campana (tras 'las-calandrias' del 06-06 y 'barrio-el-campo-fincas-exclusivas-cardales' de hoy)." }
+    ],
+    nota: "Cadencia diaria preservada. **Movimiento exclusivo en Campana (4+/4-), 10 fuentes en espejo absoluto.** Rompe el espejo absoluto del 12-06 sin ser ráfaga multi-fuente. **Patrón NUEVO identificado: baja masiva de familia** — los 4 IDs 15925x caen juntos, atípico vs el FIFO 1+/1- habitual. **Patrón CONSOLIDADO: re-emergencia de ID reciente con cadencia ~1 semana** — 15608517 vuelve tras 7 días (vs 19311911 tras 9 días). **Patrón ya observado, REFORZADO: slug nuevo en Campana** — hoy entran 2 slugs nuevos simultáneos (19782477 + 18526091), elevando a 3 el total de slugs nuevos en Campana del run (incluye 19812510/las-calandrias del 06-06). Re-balanceo geográfico de p1: sale Campana centro (familia 1592x), entra cinturón residencial (Los Cardales / countries). **Frontera generacional global del run sigue en 1983x/Cutral Có (3.º chequeo consecutivo)** — el 19782477 entra DEBAJO, no es avance del frontier. **Rincón cambio estructural DEFINITIVAMENTE confirmado** (3.º chequeo post-salto). Clase histórica acumulativa intacta — los 4 IDs históricos persisten. vacamuertapropiedades: 9.º chequeo consecutivo en canónico .com.ar. No se regenera listings.js (todas las altas son countries/barrios cerrados residenciales fuera del foco industrial). Sugerencias para 14-06: (1) si los 4 15925x vuelven juntos = fue re-rank temporal; si ninguno vuelve = baja real coordinada. (2) Si entra OTRO slug nuevo en Campana = re-balanceo geográfico persistente. (3) Si Cutral Có rota o cae = frontier 1983x se mueve; si persiste 4.º = fijación con holgura máxima. (4) Si reaparece OTRO ID en ventana ~7-9 días en cualquier fuente = cadencia 're-emergencia' confirmadísima. (5) Si Plaza Huincul/Chañar suman 1983x+ propio = ronda de avance multi-fuente arrancando."
+  },
+  {
     fecha: "2026-06-09",
     snapshot_base: "2026-06-07",
     resumen_por_fuente: {
