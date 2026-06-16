@@ -10,6 +10,69 @@
 
 window.UPDATES = [
   {
+    fecha: "2026-06-16",
+    snapshot_base: "2026-06-15",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0, nota: "19833452 (1983x) PERSISTE 6.º chequeo consecutivo — récord propio del run en frontier global persistente, holgura HIPER-extrema sin retador." },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0, nota: "19798515 (1979x) frontier local sin cambios — ronda multi-fuente sigue inactiva." },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "8214482 PERSISTE 8.º chequeo consecutivo — clase histórica rota lento ULTRA-consolidada. 12060433 (1206x) 5.º chequeo. 19755626 NO vuelve (8.º chequeo afuera) — salida definitiva ULTRA-consolidada." },
+      "argenprop — Rincón de los Sauces":          { snapshot: 6,  hoy: 6,  agregadas: 0, bajadas: 0, nota: "Set idéntico 6.º chequeo post-salto — set Rincón = 6 IDs ya es constante axiomática del sistema. 15827220 + 16238703 catalogados permanentes." },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "ESPEJO IDS — pero ANOMALÍA DE SLUG: 18526091 hoy aparece como `countries-y-barrios-cerrados-en-campana--18526091` (en 15-06 venía como `cardales-village--18526091`). Mismo ID, slug rotado por argenprop — primer caso del run de rotación de slug para ID activo en p1. Cluster countries/Cardales alcanza 9 IDs simultáneos (45% del set). 4 altas Cardales del 13-06 persisten 4.º chequeo. 16475158 (alta 15-06) 2.º chequeo. 19812510 (salido 15-06) 1.º chequeo afuera." },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Duodécimo chequeo consecutivo en dominio canónico vacamuertapropiedades.com.ar (sin contar gaps 04-06, 08-06, 10-06). Slugs idénticos (pid9, pid67, pid127, pid263). 5.º chequeo consecutivo idéntico desde el 12-06." }
+    },
+    cambios: [],
+    nota: "Cadencia diaria preservada. **ESPEJO ABSOLUTO EN LAS 11 FUENTES 0+/0-**, tras la rotura mínima de Campana del 15-06 (1+/1-). **TERCER espejo absoluto del run** (12-06, 14-06, 16-06) — cadencia ~2 días para esta condición. **Verificación de hipótesis del 15-06**: (1) `19812510` reaparición ventana 7-9 días → PENDIENTE, día 1 afuera; (2) otro slug countries-y-barrios → AMBIGUA pero REFORZADA, 18526091 rota slug a countries-y-barrios-cerrados-en-campana (cluster alcanza 9 IDs = 45% del set Campana); (3) Cutral Có rota → NO, persiste 6.º chequeo (récord propio); (4) Plaza Huincul/Chañar a 1980x+ → NO, frontiers locales congelados; (5) entra aviso ≥1984x → NO, frontier global sigue en 1983x; (6) Rincón modifica set → NO, 6.º chequeo idéntico (constante axiomática). **PATRÓN NUEVO DETECTADO: SLUG ROTATION** — argenprop reorganiza categoría geográfica de un aviso sin bajarlo. 18526091 es primer caso del run — categoría aparte de 'slug NUEVO en fuente' (altas) y representa re-clasificación interna del motor. **Pausa del corredor generacional empata récord previo (3 días: 14-06, 15-06, 16-06)** — récord histórico previo era 06-06→09-06. Cuarto día rompería el patrón y entraría modo 'fijación-pre-salto' (avance compensatorio doble esperable). Clase histórica acumulativa intacta — los 5 IDs históricos (8214482, 15827220, 16238703, 12060433, 16475158) en estado de persistencia ULTRA-estable monotónicamente creciente. vacamuertapropiedades: 12.º chequeo consecutivo en canónico .com.ar. No se regenera listings.js (cero altas materiales). Sugerencias para 17-06: (1) si pausa corredor llega a 4 días = rompe récord; (2) si reaparece 19812510 = confirma 'frontier oscila, vuelve'; (3) si OTRO ID rota de slug = confirma 'slug rotation' como régimen; (4) si entra ≥1984x = fin de pausa, nueva ronda; (5) si Rincón modifica set = primera fluctuación realmente significativa post 6 chequeos; (6) si Cutral Có rota = primer cambio del frontier global del run."
+  },
+  {
+    fecha: "2026-06-15",
+    snapshot_base: "2026-06-14",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0, nota: "19833452 (1983x) PERSISTE 5.º chequeo consecutivo — frontera generacional 1983x del run con holgura HIPER-extrema." },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0 },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "8214482 PERSISTE 7.º chequeo consecutivo — clase histórica rota lento. 12060433 (1206x) 4.º chequeo. 19755626 NO vuelve (7.º chequeo afuera) — salida definitiva." },
+      "argenprop — Rincón de los Sauces":          { snapshot: 6,  hoy: 6,  agregadas: 0, bajadas: 0, nota: "Set idéntico 5.º chequeo post-salto — cambio estructural ULTRA-consolidado, persistencia prácticamente axiomática." },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 1, bajadas: 1, nota: "ÚNICA FUENTE CON MOVIMIENTO HOY. Rompe espejo absoluto del 14-06 con 1+/1-. SALE 19812510 (1981x, frontera local Campana desde el 06-06 — 9 días en p1) → primera caída regresiva de frontier local activo del run. ENTRA 16475158 (slug NUEVO 'countries-y-barrios-cerrados-en-campana', familia 1647x, ID histórico generación 2018-2019) → 5.ª alta de la clase histórica viva en p1 simultáneamente. Frontera Campana baja de 1981x a 1978x (19782477 queda como techo)." },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Undécimo chequeo consecutivo en dominio canónico vacamuertapropiedades.com.ar (sin contar gaps 04-06, 08-06, 10-06). Slugs idénticos (pid9, pid67, pid127, pid263)." }
+    },
+    cambios: [
+      { fuente: "argenprop — Campana", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-las-calandrias--19812510", nota: "FRONTERA LOCAL Campana 1981x — estaba en p1 desde el 06-06 (9 días consecutivos). Primera caída regresiva de frontier local activo del run. Su salida significa que la frontera generacional propia de Campana cae de 1981x → 1978x (19782477 queda como techo Campana). Hipótesis: las fronteras locales tienen vida media ~5-10 días en p1, no son permanentes como las clases históricas." },
+      { fuente: "argenprop — Campana", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-countries-y-barrios-cerrados-en-campana--16475158", nota: "Slug NUEVO en Campana, familia 1647x (ID histórico generación 2018). Continúa el flujo de IDs históricos a Campana (se suma a 15608517 reaparecida del 13-06). Con esta alta son 5 IDs históricos (7-8 dígitos) vivos en p1 simultáneamente — patrón 'clase histórica entra y se queda' alcanza nueva masa crítica." }
+    ],
+    nota: "Cadencia diaria preservada. **Movimiento ÚNICO: Campana 1+/1- rompe el espejo absoluto del 14-06**, 10 fuentes en espejo absoluto. **Primera caída regresiva de frontier local activo del run** (19812510, 1981x, Campana, 9 días en p1). Frontera Campana baja de 1981x a 1978x. **5.ª alta de la clase histórica viva en p1 simultáneamente** (16475158 se suma a 8214482, 15827220, 16238703, 12060433). **Patrón 'Cardales/countries reemplaza a frontier'**: salida de 1981x + entrada de 1647x (ambas en Campana) sugiere que el motor está sustituyendo techo generacional por relleno histórico. **Cutral Có 19833452 PERSISTE 5.º chequeo consecutivo** — frontera generacional 1983x global del run con holgura HIPER-extrema. **Rincón cambio estructural ULTRA-consolidado** (5.º chequeo post-salto). vacamuertapropiedades: 11.º chequeo consecutivo en canónico .com.ar. No se regenera listings.js (16475158 es ID histórico, no nueva pieza de inventario reciente)."
+  },
+  {
+    fecha: "2026-06-14",
+    snapshot_base: "2026-06-13",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0, nota: "19833452 (1983x) PERSISTE 4.º chequeo consecutivo — frontera generacional 1983x del run con holgura HIPER-extrema." },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0 },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "8214482 PERSISTE 6.º chequeo consecutivo. 12060433 (1206x) 3.º chequeo. 19755626 6.º chequeo afuera — salida definitiva confirmada." },
+      "argenprop — Rincón de los Sauces":          { snapshot: 6,  hoy: 6,  agregadas: 0, bajadas: 0, nota: "Set idéntico 4.º chequeo post-salto — cambio estructural confirmadísimo." },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "Vuelve al espejo tras el sacudón del 13-06 (4+/4-). Las 4 altas Cardales persisten 2.º chequeo. Familia 1592x sigue afuera (2.º chequeo) — baja real coordinada confirmada." },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "Décimo chequeo consecutivo en dominio canónico vacamuertapropiedades.com.ar (sin contar gaps 04-06, 08-06, 10-06). Slugs idénticos." }
+    },
+    cambios: [],
+    nota: "Cadencia diaria preservada. **ESPEJO ABSOLUTO EN LAS 11 FUENTES 0+/0-** tras el sacudón del 13-06 (Campana 4+/4-). 2.º espejo absoluto del run (12-06, 14-06) — cadencia ~2 días. **Fijación post-sacudón confirmada**: las 4 altas Cardales del 13-06 persisten íntegras 2.º chequeo (15608517, 18045092, 19782477, 18526091); familia 1592x sigue afuera 2.º chequeo (baja real coordinada confirmada). **Cutral Có 19833452 PERSISTE 4.º chequeo consecutivo** — frontera 1983x global con holgura HIPER-extrema. **Frontiers Plaza Huincul/Chañar 1979x sin cambios** — ronda multi-fuente inactiva. **Rincón 5.º chequeo post-salto** — cambio estructural axiomático. vacamuertapropiedades: 10.º chequeo consecutivo en canónico .com.ar. No se regenera listings.js."
+  },
+  {
     fecha: "2026-06-13",
     snapshot_base: "2026-06-12",
     resumen_por_fuente: {
