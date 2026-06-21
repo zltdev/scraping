@@ -10,6 +10,29 @@
 
 window.UPDATES = [
   {
+    fecha: "2026-06-21",
+    snapshot_base: "2026-06-20",
+    resumen_por_fuente: {
+      "argenprop — Añelo":                         { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Centenario":                    { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — San Patricio del Chañar":       { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Cutral Có":                     { snapshot: 1,  hoy: 1,  agregadas: 0, bajadas: 0, nota: "19833452 PERSISTE 11.º chequeo consecutivo — récord propio renovado. 4.º techo del run." },
+      "argenprop — Neuquén capital":               { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "argenprop — Plaza Huincul":                 { snapshot: 5,  hoy: 5,  agregadas: 0, bajadas: 0 },
+      "argenprop — Plottier":                      { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0, nota: "8214482 PERSISTE 13.º chequeo récord propio renovado (último caso límite hiper-estabilidad histórica vivo). Doblete 1987x (19870568+19871079) PERSISTE 4.º chequeo sin recuperar frontier — patrón 'doblete persiste sin importar pérdida de frontier' CONFIRMADO. 19755626 13.º chequeo afuera récord propio renovado." },
+      "argenprop — Rincón de los Sauces":          { snapshot: 7,  hoy: 7,  agregadas: 0, bajadas: 0, nota: "Frontier global 19887818 (1988x) PERSISTE 2.º chequeo — consolidación día 2. Set 7 IDs PERSISTE 2.º chequeo (nueva cardinalidad consolidada, refuta 'expansión transitoria')." },
+      "argenprop — Campana":                       { snapshot: 20, hoy: 20, agregadas: 1, bajadas: 1, nota: "EVENTO MAYOR: REAPARICIÓN HISTÓRICA 16475158 TRAS 4 CHEQUEOS AFUERA — PRIMER CASO DEL RUN, confirma hipótesis 'oscilación múltiple' del 19-06/20-06. SALE 15608517 (mismo slug countries-y-barrios-cerrados-en-campana, persistente desde inicio del run). ROTACIÓN INTRA-SLUG SIN CAMBIO DE CARDINALIDAD: slug countries-y-barrios-cerrados-en-campana mantiene 2 IDs (ahora 16475158+18619706, antes 15608517+18619706) — patrón nuevo confirmado. 19862176 PERSISTE 5.º chequeo (3.er techo consolidado). 19782477 PERSISTE 9.º chequeo." },
+      "argenprop — Zárate":                        { snapshot: 20, hoy: 20, agregadas: 0, bajadas: 0 },
+      "icasas — Añelo":                            { snapshot: null, hoy: null, agregadas: null, bajadas: null, nota: "Omitido: la paginación rota orden entre cargas y el diff no es confiable." },
+      "vacamuertapropiedades — home (terrenos)":   { snapshot: 4,  hoy: 4,  agregadas: 0, bajadas: 0, nota: "PERSISTE en canónico vacamuertapropiedades.com.ar 2.º chequeo consecutivo tras el retorno del 20-06 (recuperación post-variante con guiones). 10.º chequeo consecutivo idéntico del catálogo de terrenos desde el 12-06 (pid9, pid67, pid127, pid263)." }
+    },
+    cambios: [
+      { fuente: "argenprop — Campana", tipo: "agregada", url: "https://www.argenprop.com/terreno-en-venta-en-countries-y-barrios-cerrados-en-campana--16475158", nota: "REAPARICIÓN HISTÓRICA TARDÍA — PRIMER CASO DEL RUN. ID familia 1647x, slug 'countries-y-barrios-cerrados-en-campana'. Estuvo afuera 4 chequeos (salido 17-06, reaparece 21-06) — ventana 5-7 días sugerida el 19-06 cumplida. CONFIRMA INDISCUTIBLEMENTE hipótesis 'oscilación múltiple'. Implicación: 12060433 y 19450773 (ambos 4.º chequeo afuera) entran en ventana de reaparición probable." },
+      { fuente: "argenprop — Campana", tipo: "bajada",   url: "https://www.argenprop.com/terreno-en-venta-en-countries-y-barrios-cerrados-en-campana--15608517", nota: "ID familia 1560x, mismo slug 'countries-y-barrios-cerrados-en-campana'. Persistente desde inicio del run (>50 días en p1). Día 1 afuera — vigilar reaparición tardía. ROTACIÓN INTRA-SLUG: el slug mantiene cardinalidad 2 IDs mientras los integrantes rotan — primera evidencia documentada del run de 'slug-casillero'." }
+    ],
+    nota: "Sin gap — corrida diaria normal. **EVENTO MAYOR: REAPARICIÓN HISTÓRICA TARDÍA 16475158 EN CAMPANA tras 4 chequeos afuera** — PRIMER CASO DOCUMENTADO DEL RUN de reaparición tras >2 chequeos afuera. **CONFIRMACIÓN INDISCUTIBLE de hipótesis 'oscilación múltiple' del 19-06/20-06**. La salida 'definitiva' del 17-06 queda RELATIVIZADA y, retroactivamente, también las salidas 'definitivas' de 12060433 y 19450773 (ambos 4.º chequeo afuera, en ventana de reaparición). **PATRÓN NUEVO CONFIRMADO: ROTACIÓN INTRA-SLUG SIN CAMBIO DE CARDINALIDAD** — el slug 'countries-y-barrios-cerrados-en-campana' mantiene cardinalidad 2 IDs mientras integrantes rotan (16475158 reemplaza a 15608517). Primera evidencia documentada del run de 'slug-casillero'. **Frontier global 19887818 (Rincón 1988x) PERSISTE 2.º chequeo** — frontier consolida día 2. **Rincón 7 IDs PERSISTE 2.º chequeo** — nueva cardinalidad consolidada (refuta 'expansión transitoria'). **Cuatro techos del run vivos simultáneamente PERSISTEN**: 1988x Rincón > 1987x Plottier doblete > 1986x Campana > 1983x Cutral Có. **vacamuertapropiedades PERSISTE en canónico .com.ar 2.º chequeo consecutivo** (recuperación completa post-variante con guiones). Cutral Có 11.º chequeo récord propio, Plottier 8214482 13.º récord propio, 19862176 Campana 5.º consolidación ex-frontier sin precedente, doblete 1987x Plottier 4.º (patrón 'doblete persiste sin frontier' CONFIRMADO), 19755626 13.º afuera récord propio renovado. **Campana ROMPE espejo absoluto del 19-06/20-06** (1+/1-) — primera fuente en romperlo tras 2 días, consistente con Campana siendo la fuente más activa del run. Resto: 9/11 fuentes ESPEJO ABSOLUTO. No se regenera listings.js (la reaparición 16475158 ya estaba en catálogo Campana cluster Cardales/countries)."
+  },
+  {
     fecha: "2026-06-05",
     snapshot_base: "2026-06-03",
     resumen_por_fuente: {
